@@ -20,7 +20,7 @@ import {
   AlertTriangle,
   Award,
 } from 'lucide-react';
-import { checkHealth } from '../lib/api';
+import { checkHealth, API_BASE_URL, FALLBACK_STOCKS } from '../lib/api';
 import { HealthResponse } from '../lib/types';
 // Popular comparisons
 const POPULAR_COMPARISONS: Array<[string, string, string]> = [
@@ -52,18 +52,34 @@ interface ValidationState {
   message: string;          // friendly hint to show under the fields
 }
 
-/** Resolve a single query live against the backend so we can surface a chip + sector. */
+/** Resolve a single query live against the backend or offline catalog so we can surface a chip + sector. */
 async function resolveQuery(q: string): Promise<{ ticker: string; name: string; sector: string } | null> {
+  const cleanQ = q.trim().toLowerCase();
   try {
-    const res = await fetch(`/api/resolve?q=${encodeURIComponent(q.trim())}`);
-    if (!res.ok) return null;
-    const json = await res.json();
-    const match = json.match;
-    if (!match || json.is_ambiguous) return null;
-    return { ticker: match.ticker, name: match.name, sector: match.sector ?? 'Diversified' };
+    const res = await fetch(`${API_BASE_URL}/api/resolve?q=${encodeURIComponent(q.trim())}`);
+    if (res.ok) {
+      const json = await res.json();
+      const match = json.match;
+      if (match && !json.is_ambiguous) {
+        return { ticker: match.ticker, name: match.name, sector: match.sector ?? 'Diversified' };
+      }
+    }
   } catch {
-    return null;
+    // Backend offline / not reached
   }
+
+  // Resilient offline fallback
+  const found = FALLBACK_STOCKS.find(
+    (s) =>
+      s.name.toLowerCase() === cleanQ ||
+      s.ticker.toLowerCase() === cleanQ ||
+      s.name.toLowerCase().includes(cleanQ) ||
+      s.ticker.toLowerCase().includes(cleanQ)
+  );
+  if (found) {
+    return { ticker: found.ticker, name: found.name, sector: found.sector };
+  }
+  return null;
 }
 
 const DEFAULT_POPULAR_1 = [
@@ -124,7 +140,7 @@ const CompanyInput: React.FC<{
     }
     setLoading(true);
     try {
-      const res = await fetch(`/api/resolve?q=${encodeURIComponent(q)}`);
+      const res = await fetch(`${API_BASE_URL}/api/resolve?q=${encodeURIComponent(q)}`);
       if (res.ok) {
         const json = await res.json();
         const items: Array<{ name: string; ticker: string; display: string; sector: string; isTop?: boolean }> = [];
@@ -154,15 +170,34 @@ const CompanyInput: React.FC<{
           }
         }
         setResults(items);
-      } else {
-        setResults([]);
-        setIsResolved(false);
+        return;
       }
     } catch {
+      // Backend not reached, fall through to offline matcher
+    }
+
+    // Offline matcher for typing suggestions & resolution
+    const clean = q.toLowerCase();
+    const matched = FALLBACK_STOCKS.filter(
+      (s) =>
+        s.name.toLowerCase().includes(clean) ||
+        s.ticker.toLowerCase().includes(clean)
+    );
+    if (matched.length > 0) {
+      const items = matched.map((m, idx) => ({
+        name: m.name,
+        ticker: m.ticker,
+        display: m.display,
+        sector: m.sector,
+        isTop: idx === 0,
+      }));
+      setResults(items);
+      setIsResolved(true);
+      setResolvedName(items[0].name);
+      setResolvedSector(items[0].sector);
+    } else {
       setResults([]);
       setIsResolved(false);
-    } finally {
-      setLoading(false);
     }
   }, [query, accentNumber]);
 
