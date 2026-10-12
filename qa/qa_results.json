@@ -1,0 +1,681 @@
+{
+  "generated_at": "2026-10-03T02:29:04",
+  "total": 14,
+  "passed": 14,
+  "failed": 0,
+  "results": [
+    {
+      "key": "hal_mazdock",
+      "query1": "HAL",
+      "query2": "Mazagon Dock",
+      "why": "assigned exhibition pair",
+      "elapsed_s": 0.62,
+      "status": 200,
+      "fails": [],
+      "warns": [],
+      "resolution": {
+        "c1": "HAL.NS",
+        "c2": "MAZDOCK.NS"
+      },
+      "stats": {
+        "daily_a": 500,
+        "daily_b": 500,
+        "months": 25,
+        "events_a": 6,
+        "events_b": 6
+      },
+      "cross_verify": {
+        "ticker": "HAL.NS",
+        "checks": [
+          {
+            "pick": "total_return_pct",
+            "actual": 10.09,
+            "expected": 10.09,
+            "ok": true,
+            "tolerance": 0.15
+          },
+          {
+            "pick": "cagr_pct",
+            "actual": 4.94,
+            "expected": 4.94,
+            "ok": true,
+            "tolerance": 0.15
+          },
+          {
+            "pick": "max_drawdown_pct",
+            "actual": 33.48,
+            "expected": 33.48,
+            "ok": true,
+            "tolerance": 0.15
+          }
+        ]
+      }
+    },
+    {
+      "key": "reliance_bhartiartl",
+      "query1": "Reliance",
+      "query2": "Bharti Airtel",
+      "why": "assigned exhibition pair",
+      "elapsed_s": 0.65,
+      "status": 200,
+      "fails": [],
+      "warns": [],
+      "resolution": {
+        "c1": "RELIANCE.NS",
+        "c2": "BHARTIARTL.NS"
+      },
+      "stats": {
+        "daily_a": 500,
+        "daily_b": 500,
+        "months": 25,
+        "events_a": 6,
+        "events_b": 6
+      },
+      "cross_verify": {
+        "ticker": "RELIANCE.NS",
+        "checks": [
+          {
+            "pick": "monthly_close(2026-09)",
+            "actual": 1187.0,
+            "expected": 1187.0,
+            "ok": true,
+            "tolerance": 0.05
+          },
+          {
+            "pick": "max_drawdown_pct",
+            "actual": 26.33,
+            "expected": 26.33,
+            "ok": true,
+            "tolerance": 0.15
+          },
+          {
+            "pick": "cagr_pct",
+            "actual": -8.53,
+            "expected": -8.53,
+            "ok": true,
+            "tolerance": 0.15
+          }
+        ]
+      }
+    },
+    {
+      "key": "bajajfinsv_hdfcbank",
+      "query1": "Bajaj Finserv",
+      "query2": "HDFC Bank",
+      "why": "assigned exhibition pair",
+      "elapsed_s": 19.74,
+      "status": 200,
+      "fails": [],
+      "warns": [],
+      "resolution": {
+        "c1": "BAJAJFINSV.NS",
+        "c2": "HDFCBANK.NS"
+      },
+      "stats": {
+        "daily_a": 500,
+        "daily_b": 500,
+        "months": 25,
+        "events_a": 6,
+        "events_b": 6
+      },
+      "cross_verify": {
+        "ticker": "BAJAJFINSV.NS",
+        "checks": [
+          {
+            "pick": "monthly_close(2025-04)",
+            "actual": 1948.99,
+            "expected": 1948.99,
+            "ok": true,
+            "tolerance": 0.05
+          },
+          {
+            "pick": "annualized_volatility_pct",
+            "actual": 24.48,
+            "expected": 24.48,
+            "ok": true,
+            "tolerance": 0.15
+          },
+          {
+            "pick": "current_price",
+            "actual": 1732.6,
+            "expected": 1732.6,
+            "ok": true,
+            "tolerance": 0.05
+          }
+        ]
+      }
+    },
+    {
+      "key": "titan_vbl",
+      "query1": "Titan",
+      "query2": "Varun Beverages",
+      "why": "assigned exhibition pair",
+      "elapsed_s": 16.72,
+      "status": 200,
+      "fails": [],
+      "warns": [],
+      "resolution": {
+        "c1": "TITAN.NS",
+        "c2": "VBL.NS"
+      },
+      "stats": {
+        "daily_a": 500,
+        "daily_b": 500,
+        "months": 25,
+        "events_a": 6,
+        "events_b": 6
+      },
+      "cross_verify": {
+        "ticker": "TITAN.NS",
+        "checks": [
+          {
+            "pick": "total_return_pct",
+            "actual": 23.65,
+            "expected": 23.65,
+            "ok": true,
+            "tolerance": 0.15
+          },
+          {
+            "pick": "max_drawdown_pct",
+            "actual": 18.72,
+            "expected": 18.72,
+            "ok": true,
+            "tolerance": 0.15
+          },
+          {
+            "pick": "cagr_pct",
+            "actual": 11.24,
+            "expected": 11.24,
+            "ok": true,
+            "tolerance": 0.15
+          }
+        ]
+      }
+    },
+    {
+      "key": "coalindia_adanipower",
+      "query1": "Coal India",
+      "query2": "Adani Power",
+      "why": "assigned exhibition pair",
+      "elapsed_s": 17.47,
+      "status": 200,
+      "fails": [],
+      "warns": [],
+      "resolution": {
+        "c1": "COALINDIA.NS",
+        "c2": "ADANIPOWER.NS"
+      },
+      "stats": {
+        "daily_a": 500,
+        "daily_b": 500,
+        "months": 25,
+        "events_a": 6,
+        "events_b": 6
+      },
+      "cross_verify": {
+        "ticker": "COALINDIA.NS",
+        "checks": [
+          {
+            "pick": "annualized_volatility_pct",
+            "actual": 22.27,
+            "expected": 22.27,
+            "ok": true,
+            "tolerance": 0.15
+          },
+          {
+            "pick": "total_return_pct",
+            "actual": -3.29,
+            "expected": -3.29,
+            "ok": true,
+            "tolerance": 0.15
+          },
+          {
+            "pick": "max_drawdown_pct",
+            "actual": 25.81,
+            "expected": 25.82,
+            "ok": true,
+            "tolerance": 0.15
+          }
+        ]
+      }
+    },
+    {
+      "key": "tvsmotor_tmpv",
+      "query1": "TVS Motor",
+      "query2": "Tata Motors",
+      "why": "assigned exhibition pair",
+      "elapsed_s": 18.41,
+      "status": 200,
+      "fails": [],
+      "warns": [
+        [
+          "fake_crash",
+          "company_B: single-day drop -40.2% on 2025-10-14 (adjusted data - verify not a split artifact)"
+        ]
+      ],
+      "resolution": {
+        "c1": "TVSMOTOR.NS",
+        "c2": "TMPV.NS"
+      },
+      "stats": {
+        "daily_a": 500,
+        "daily_b": 500,
+        "months": 25,
+        "events_a": 6,
+        "events_b": 6
+      },
+      "cross_verify": {
+        "ticker": "TVSMOTOR.NS",
+        "checks": [
+          {
+            "pick": "current_price",
+            "actual": 4021.0,
+            "expected": 4021.0,
+            "ok": true,
+            "tolerance": 0.05
+          },
+          {
+            "pick": "annualized_volatility_pct",
+            "actual": 27.43,
+            "expected": 27.43,
+            "ok": true,
+            "tolerance": 0.15
+          },
+          {
+            "pick": "max_drawdown_pct",
+            "actual": 23.19,
+            "expected": 23.19,
+            "ok": true,
+            "tolerance": 0.15
+          }
+        ]
+      }
+    },
+    {
+      "key": "siemens_solarinds",
+      "query1": "Siemens",
+      "query2": "Solar Industries",
+      "why": "assigned exhibition pair",
+      "elapsed_s": 21.05,
+      "status": 200,
+      "fails": [],
+      "warns": [],
+      "resolution": {
+        "c1": "SIEMENS.NS",
+        "c2": "SOLARINDS.NS"
+      },
+      "stats": {
+        "daily_a": 499,
+        "daily_b": 499,
+        "months": 25,
+        "events_a": 6,
+        "events_b": 6
+      },
+      "cross_verify": {
+        "ticker": "SIEMENS.NS",
+        "checks": [
+          {
+            "pick": "current_price",
+            "actual": 3804.0,
+            "expected": 3804.0,
+            "ok": true,
+            "tolerance": 0.05
+          },
+          {
+            "pick": "cagr_pct",
+            "actual": -5.7,
+            "expected": -5.7,
+            "ok": true,
+            "tolerance": 0.15
+          },
+          {
+            "pick": "annualized_volatility_pct",
+            "actual": 32.52,
+            "expected": 32.52,
+            "ok": true,
+            "tolerance": 0.15
+          }
+        ]
+      }
+    },
+    {
+      "key": "escorts_bharatforg",
+      "query1": "Escorts Kubota",
+      "query2": "Bharat Forge",
+      "why": "assigned exhibition pair",
+      "elapsed_s": 18.15,
+      "status": 200,
+      "fails": [],
+      "warns": [],
+      "resolution": {
+        "c1": "ESCORTS.NS",
+        "c2": "BHARATFORG.NS"
+      },
+      "stats": {
+        "daily_a": 500,
+        "daily_b": 499,
+        "months": 25,
+        "events_a": 6,
+        "events_b": 6
+      },
+      "cross_verify": {
+        "ticker": "ESCORTS.NS",
+        "checks": [
+          {
+            "pick": "monthly_close(2025-05)",
+            "actual": 3250.57,
+            "expected": 3250.57,
+            "ok": true,
+            "tolerance": 0.05
+          },
+          {
+            "pick": "current_price",
+            "actual": 2667.3,
+            "expected": 2667.3,
+            "ok": true,
+            "tolerance": 0.05
+          },
+          {
+            "pick": "total_return_pct",
+            "actual": -34.14,
+            "expected": -34.14,
+            "ok": true,
+            "tolerance": 0.15
+          }
+        ]
+      }
+    },
+    {
+      "key": "dlf_godrejprop",
+      "query1": "DLF",
+      "query2": "Godrej Properties",
+      "why": "assigned exhibition pair",
+      "elapsed_s": 16.01,
+      "status": 200,
+      "fails": [],
+      "warns": [],
+      "resolution": {
+        "c1": "DLF.NS",
+        "c2": "GODREJPROP.NS"
+      },
+      "stats": {
+        "daily_a": 500,
+        "daily_b": 500,
+        "months": 25,
+        "events_a": 6,
+        "events_b": 6
+      },
+      "cross_verify": {
+        "ticker": "DLF.NS",
+        "checks": [
+          {
+            "pick": "annualized_volatility_pct",
+            "actual": 31.18,
+            "expected": 31.18,
+            "ok": true,
+            "tolerance": 0.15
+          },
+          {
+            "pick": "current_price",
+            "actual": 658.4,
+            "expected": 658.4,
+            "ok": true,
+            "tolerance": 0.05
+          },
+          {
+            "pick": "monthly_close(2025-08)",
+            "actual": 729.89,
+            "expected": 729.89,
+            "ok": true,
+            "tolerance": 0.05
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge_recent_listing",
+      "query1": "TMCV",
+      "query2": "HAL",
+      "why": "TMCV.NS has ~225 trading days (listed 2025-11) vs 500 for HAL.NS - uneven history",
+      "elapsed_s": 0.7,
+      "status": 200,
+      "fails": [],
+      "warns": [
+        [
+          "fake_crash",
+          "company_A: single-day drop -40.2% on 2025-10-14 (adjusted data - verify not a split artifact)"
+        ]
+      ],
+      "resolution": {
+        "c1": "TMPV.NS",
+        "c2": "HAL.NS"
+      },
+      "stats": {
+        "daily_a": 500,
+        "daily_b": 500,
+        "months": 25,
+        "events_a": 6,
+        "events_b": 6
+      },
+      "cross_verify": {
+        "ticker": "TMPV.NS",
+        "checks": [
+          {
+            "pick": "total_return_pct",
+            "actual": -69.31,
+            "expected": -69.31,
+            "ok": true,
+            "tolerance": 0.15
+          },
+          {
+            "pick": "cagr_pct",
+            "actual": -44.71,
+            "expected": -44.71,
+            "ok": true,
+            "tolerance": 0.15
+          },
+          {
+            "pick": "current_price",
+            "actual": 279.4,
+            "expected": 279.4,
+            "ok": true,
+            "tolerance": 0.05
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge_demerger",
+      "query1": "Tata Motors",
+      "query2": "Siemens",
+      "why": "Both companies went through demergers; resolver must warn, no fake crashes",
+      "elapsed_s": 0.55,
+      "status": 200,
+      "fails": [],
+      "warns": [
+        [
+          "fake_crash",
+          "company_A: single-day drop -40.2% on 2025-10-14 (adjusted data - verify not a split artifact)"
+        ]
+      ],
+      "resolution": {
+        "c1": "TMPV.NS",
+        "c2": "SIEMENS.NS"
+      },
+      "stats": {
+        "daily_a": 500,
+        "daily_b": 499,
+        "months": 25,
+        "events_a": 6,
+        "events_b": 6
+      },
+      "cross_verify": {
+        "ticker": "TMPV.NS",
+        "checks": [
+          {
+            "pick": "max_drawdown_pct",
+            "actual": 69.74,
+            "expected": 69.74,
+            "ok": true,
+            "tolerance": 0.15
+          },
+          {
+            "pick": "current_price",
+            "actual": 279.4,
+            "expected": 279.4,
+            "ok": true,
+            "tolerance": 0.05
+          },
+          {
+            "pick": "cagr_pct",
+            "actual": -44.71,
+            "expected": -44.71,
+            "ok": true,
+            "tolerance": 0.15
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge_illiquid_smallcap",
+      "query1": "20MICRONS",
+      "query2": "Solar Industries",
+      "why": "20MICRONS.NS avg volume ~133k shares/day - thin liquidity, wide spreads",
+      "elapsed_s": 11.97,
+      "status": 200,
+      "fails": [],
+      "warns": [],
+      "resolution": {
+        "c1": "20MICRONS.NS",
+        "c2": "SOLARINDS.NS"
+      },
+      "stats": {
+        "daily_a": 499,
+        "daily_b": 499,
+        "months": 25,
+        "events_a": 6,
+        "events_b": 6
+      },
+      "cross_verify": {
+        "ticker": "20MICRONS.NS",
+        "checks": [
+          {
+            "pick": "max_drawdown_pct",
+            "actual": 57.24,
+            "expected": 57.24,
+            "ok": true,
+            "tolerance": 0.15
+          },
+          {
+            "pick": "cagr_pct",
+            "actual": -14.28,
+            "expected": -14.28,
+            "ok": true,
+            "tolerance": 0.15
+          },
+          {
+            "pick": "annualized_volatility_pct",
+            "actual": 45.95,
+            "expected": 45.95,
+            "ok": true,
+            "tolerance": 0.15
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge_misspelt",
+      "query1": "hindutan aeronautic",
+      "query2": "mazagon dockshiplders",
+      "why": "Both queries misspelt; rapidfuzz must still resolve to HAL.NS / MAZDOCK.NS",
+      "elapsed_s": 0.58,
+      "status": 200,
+      "fails": [],
+      "warns": [],
+      "resolution": {
+        "c1": "HAL.NS",
+        "c2": "MAZDOCK.NS"
+      },
+      "stats": {
+        "daily_a": 500,
+        "daily_b": 500,
+        "months": 25,
+        "events_a": 6,
+        "events_b": 6
+      },
+      "cross_verify": {
+        "ticker": "HAL.NS",
+        "checks": [
+          {
+            "pick": "total_return_pct",
+            "actual": 10.09,
+            "expected": 10.09,
+            "ok": true,
+            "tolerance": 0.15
+          },
+          {
+            "pick": "monthly_close(2025-05)",
+            "actual": 4906.61,
+            "expected": 4906.61,
+            "ok": true,
+            "tolerance": 0.05
+          },
+          {
+            "pick": "annualized_volatility_pct",
+            "actual": 31.03,
+            "expected": 31.03,
+            "ok": true,
+            "tolerance": 0.15
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge_non_indian",
+      "query1": "AAPL",
+      "query2": "MSFT",
+      "why": "US tickers: no .NS suffix, no sector index, benchmark ^NSEI is unrelated",
+      "elapsed_s": 17.09,
+      "status": 200,
+      "fails": [],
+      "warns": [],
+      "resolution": {
+        "c1": "AAPL",
+        "c2": "MSFT"
+      },
+      "stats": {
+        "daily_a": 501,
+        "daily_b": 501,
+        "months": 25,
+        "events_a": 6,
+        "events_b": 6
+      },
+      "cross_verify": {
+        "ticker": "AAPL",
+        "checks": [
+          {
+            "pick": "total_return_pct",
+            "actual": 49.1,
+            "expected": 49.1,
+            "ok": true,
+            "tolerance": 0.15
+          },
+          {
+            "pick": "max_drawdown_pct",
+            "actual": 33.36,
+            "expected": 33.36,
+            "ok": true,
+            "tolerance": 0.15
+          },
+          {
+            "pick": "monthly_close(2025-04)",
+            "actual": 211.2,
+            "expected": 211.2,
+            "ok": true,
+            "tolerance": 0.05
+          }
+        ]
+      }
+    }
+  ]
+}

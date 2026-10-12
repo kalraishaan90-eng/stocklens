@@ -1,0 +1,24 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Runtime caches and Python artifacts
+backend/cache/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Frontend dependencies and builds
+frontend/node_modules/
+frontend/dist/
+.vite/
+**/.vite/
+
+# Local tool and editor state
+.freebuff/
+.vscode/
+.idea/

@@ -1,0 +1,106 @@
+{
+  "generated_at": "2026-10-03T02:22:43.627570+00:00",
+  "total_pairs": 9,
+  "snapshots_built": 9,
+  "pairs": [
+    {
+      "pair_key": "hal_mazdock",
+      "file": "hal_mazdock.json",
+      "company1": "Hindustan Aeronautics Limited",
+      "ticker1": "HAL.NS",
+      "company2": "Mazagon Dock Shipbuilders Limited",
+      "ticker2": "MAZDOCK.NS",
+      "captured_at": "October 03, 2026",
+      "size_kb": 519.3,
+      "status": "ready"
+    },
+    {
+      "pair_key": "reliance_bhartiartl",
+      "file": "reliance_bhartiartl.json",
+      "company1": "Reliance Industries Limited",
+      "ticker1": "RELIANCE.NS",
+      "company2": "Bharti Airtel Limited",
+      "ticker2": "BHARTIARTL.NS",
+      "captured_at": "October 03, 2026",
+      "size_kb": 527.7,
+      "status": "ready"
+    },
+    {
+      "pair_key": "bajajfinsv_hdfcbank",
+      "file": "bajajfinsv_hdfcbank.json",
+      "company1": "Bajaj Finserv Limited",
+      "ticker1": "BAJAJFINSV.NS",
+      "company2": "HDFC Bank Limited",
+      "ticker2": "HDFCBANK.NS",
+      "captured_at": "October 03, 2026",
+      "size_kb": 489.6,
+      "status": "ready"
+    },
+    {
+      "pair_key": "titan_vbl",
+      "file": "titan_vbl.json",
+      "company1": "Titan Company Limited",
+      "ticker1": "TITAN.NS",
+      "company2": "Varun Beverages Limited",
+      "ticker2": "VBL.NS",
+      "captured_at": "October 03, 2026",
+      "size_kb": 486.7,
+      "status": "ready"
+    },
+    {
+      "pair_key": "coalindia_adanipower",
+      "file": "coalindia_adanipower.json",
+      "company1": "Coal India Limited",
+      "ticker1": "COALINDIA.NS",
+      "company2": "Adani Power Limited",
+      "ticker2": "ADANIPOWER.NS",
+      "captured_at": "October 03, 2026",
+      "size_kb": 487.5,
+      "status": "ready"
+    },
+    {
+      "pair_key": "tvsmotor_tmpv",
+      "file": "tvsmotor_tmpv.json",
+      "company1": "TVS Motor Company Limited",
+      "ticker1": "TVSMOTOR.NS",
+      "company2": "Tata Motors Passenger Vehicles Limited",
+      "ticker2": "TMPV.NS",
+      "captured_at": "October 03, 2026",
+      "size_kb": 506.2,
+      "status": "ready"
+    },
+    {
+      "pair_key": "siemens_solarinds",
+      "file": "siemens_solarinds.json",
+      "company1": "Siemens Limited",
+      "ticker1": "SIEMENS.NS",
+      "company2": "Solar Industries India Limited",
+      "ticker2": "SOLARINDS.NS",
+      "captured_at": "October 03, 2026",
+      "size_kb": 501.5,
+      "status": "ready"
+    },
+    {
+      "pair_key": "escorts_bharatforg",
+      "file": "escorts_bharatforg.json",
+      "company1": "Escorts Kubota Limited",
+      "ticker1": "ESCORTS.NS",
+      "company2": "Bharat Forge Limited",
+      "ticker2": "BHARATFORG.NS",
+      "captured_at": "October 03, 2026",
+      "size_kb": 524.2,
+      "status": "ready"
+    },
+    {
+      "pair_key": "dlf_godrejprop",
+      "file": "dlf_godrejprop.json",
+      "company1": "DLF Limited",
+      "ticker1": "DLF.NS",
+      "company2": "Godrej Properties Limited",
+      "ticker2": "GODREJPROP.NS",
+      "captured_at": "October 03, 2026",
+      "size_kb": 510.4,
+      "status": "ready"
+    }
+  ]
+}

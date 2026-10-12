@@ -1,0 +1,141 @@
+/* StockLens Design System: Design Tokens & Base Theme
+   Direction: Dark, cinematic, editorial, premium financial terminal meets luxury magazine.
+   Palette: Near-black warm base (#0A0B0D), surface (#101215), raised (#171A1F).
+   Typography: Display serif (Fraunces/Playfair Display), Inter for UI, JetBrains Mono for prices/percentages.
+*/
+
+:root {
+  /* Surfaces & Backgrounds */
+  --bg-base: #0A0B0D;
+  --bg-surface: #101215;
+  --bg-raised: #171A1F;
+  --bg-overlay: rgba(10, 11, 13, 0.85);
+  --bg-hover: rgba(255, 255, 255, 0.04);
+  --bg-active: rgba(255, 255, 255, 0.08);
+
+  /* Hairline Borders & Dividers */
+  --border-hairline: rgba(255, 255, 255, 0.07);
+  --border-subtle: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.22);
+  --border-focus: #C9A96A;
+
+  /* Typography / Editorial Text */
+  --text-primary: #F2F0EB;   /* Warm off-white (17.4:1 on base) */
+  --text-secondary: #9A9A94; /* Editorial secondary (6.8:1) */
+  --text-muted: #7E7F78;     /* Captions - 4.8:1, passes WCAG AA */
+  --text-inverse: #0A0B0D;
+
+  /* Semantic Financial Accents */
+  --color-gain: #2FD08A;         /* Refined emerald */
+  --color-gain-dim: rgba(47, 208, 138, 0.12);
+  --color-gain-border: rgba(47, 208, 138, 0.3);
+
+  --color-loss: #FF5A4D;         /* Muted vermilion */
+  --color-loss-dim: rgba(255, 90, 77, 0.12);
+  --color-loss-border: rgba(255, 90, 77, 0.3);
+
+  --color-neutral: #C9A96A;      /* Champagne gold */
+  --color-neutral-dim: rgba(201, 169, 106, 0.12);
+  --color-neutral-border: rgba(201, 169, 106, 0.3);
+
+  /* Comparative Company Accents */
+  --company1-accent: #C9A96A;    /* Champagne gold */
+  --company1-accent-dim: rgba(201, 169, 106, 0.15);
+  --company2-accent: #6FB7D6;    /* Cool steel-cyan */
+  --company2-accent-dim: rgba(111, 183, 214, 0.15);
+
+  /* Inner Card Highlight & Shadows */
+  --shadow-inner-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+  --shadow-card: inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 12px 32px -8px rgba(0, 0, 0, 0.65);
+  --shadow-glow-champagne: 0 0 40px -10px rgba(201, 169, 106, 0.22);
+  --shadow-glow-cyan: 0 0 40px -10px rgba(111, 183, 214, 0.22);
+
+  /* Radii */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-card: 12px;
+  --radius-full: 9999px;
+
+  /* Motion & Timing */
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 180ms;
+  --duration-normal: 280ms;
+  --duration-deliberate: 400ms;
+}
+
+/* Tabular figures for numbers */
+.font-tabular {
+  font-feature-settings: "tnum" 1, "lnum" 1, "cv05" 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 1px inner highlight for cards instead of heavy drop shadow */
+.card-highlight {
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-hairline);
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-card);
+}
+
+.card-raised {
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-raised);
+  border-radius: var(--radius-card);
+}
+
+/* Subtle Film Grain Texture Overlay at 3-4% Opacity */
+.film-grain-overlay {
+  position: relative;
+}
+
+.film-grain-overlay::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+}
+
+/* Faint Radial Glow behind Hero */
+.hero-radial-glow {
+  position: relative;
+}
+
+.hero-radial-glow::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  max-width: 90vw;
+  height: 450px;
+  background: radial-gradient(ellipse at center, rgba(201, 169, 106, 0.07) 0%, rgba(111, 183, 214, 0.03) 45%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(40px);
+}
+
+/* Focus styles for keyboard accessibility */
+:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--color-neutral) !important;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
