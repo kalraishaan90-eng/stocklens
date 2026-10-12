@@ -852,6 +852,12 @@ export const Analysis: React.FC = () => {
             Retry
           </button>
           <Link
+            to="/analysis?c1=HAL&c2=Mazagon%20Dock"
+            className="px-4 py-2 bg-surface-raised hover:bg-surface-subtle border border-gold/40 text-gold text-xs font-semibold rounded-md transition"
+          >
+            Load Exhibition Pair (HAL vs Mazagon Dock)
+          </Link>
+          <Link
             to="/"
             className="px-4 py-2 bg-gold hover:bg-gold-light text-surface-base text-xs font-semibold rounded-md transition"
           >

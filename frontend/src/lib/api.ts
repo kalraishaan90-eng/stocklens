@@ -95,7 +95,11 @@ export async function analyzeStocks(
             : JSON.stringify((errorData as any).detail);
         }
       } catch {
-        errorMessage = response.statusText || errorMessage;
+        if (response.status === 405) {
+          errorMessage = 'The analysis endpoint is currently updating or offline. Please retry in a few moments.';
+        } else {
+          errorMessage = response.statusText || errorMessage;
+        }
       }
       throw new Error(errorMessage);
     }
