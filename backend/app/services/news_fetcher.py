@@ -1,4 +1,5 @@
 import asyncio
+from concurrent.futures import ThreadPoolExecutor
 import urllib.parse
 from datetime import datetime, timedelta
 from typing import List, Dict, Any, Optional
@@ -60,55 +61,42 @@ def get_corporate_events(ticker: str, event_date_str: str) -> List[str]:
     if cached_events is None:
         raw_events = []
         try:
-            t = yf.Ticker(ticker)
-            # 1. Actions (Dividends & Splits)
-            actions = getattr(t, "actions", None)
-            if actions is not None and not actions.empty:
-                act_df = actions.copy()
-                if act_df.index.tz is not None:
-                    act_df.index = act_df.index.tz_localize(None).floor("D")
-                else:
-                    act_df.index = act_df.index.floor("D")
+            # Skip indices or invalid tickers
+            if not ticker.startswith("^"):
+                def _fetch_yfinance_actions():
+                    evs = []
+                    t = yf.Ticker(ticker)
+                    actions = getattr(t, "actions", None)
+                    if actions is not None and not actions.empty:
+                        act_df = actions.copy()
+                        if act_df.index.tz is not None:
+                            act_df.index = act_df.index.tz_localize(None).floor("D")
+                        else:
+                            act_df.index = act_df.index.floor("D")
 
-                for act_dt, row in act_df.iterrows():
-                    div = float(row.get("Dividends", 0.0))
-                    split = float(row.get("Stock Splits", 0.0))
-                    d_str = act_dt.strftime("%Y-%m-%d")
-                    if div > 0:
-                        raw_events.append({
-                            "type": "dividend",
-                            "date": d_str,
-                            "desc": f"Dividend: INR {div:.2f} per share (Ex-date: {d_str})"
-                        })
-                    if split > 0:
-                        raw_events.append({
-                            "type": "split",
-                            "date": d_str,
-                            "desc": f"Stock Split: {split:.0f}:1 ratio (Ex-date: {d_str})"
-                        })
+                        for act_dt, row in act_df.iterrows():
+                            div = float(row.get("Dividends", 0.0))
+                            split = float(row.get("Stock Splits", 0.0))
+                            d_str = act_dt.strftime("%Y-%m-%d")
+                            if div > 0:
+                                evs.append({
+                                    "type": "dividend",
+                                    "date": d_str,
+                                    "desc": f"Dividend: INR {div:.2f} per share (Ex-date: {d_str})"
+                                })
+                            if split > 0:
+                                evs.append({
+                                    "type": "split",
+                                    "date": d_str,
+                                    "desc": f"Stock Split: {split:.0f}:1 ratio (Ex-date: {d_str})"
+                                })
+                    return evs
 
-            # 2. Earnings dates
-            earnings = getattr(t, "earnings_dates", None)
-            if earnings is not None and not earnings.empty:
-                e_df = earnings.copy()
-                if e_df.index.tz is not None:
-                    e_df.index = e_df.index.tz_localize(None).floor("D")
-                else:
-                    e_df.index = e_df.index.floor("D")
-
-                for e_dt, row in e_df.iterrows():
-                    d_str = e_dt.strftime("%Y-%m-%d")
-                    eps_rep = row.get("Reported EPS")
-                    eps_est = row.get("EPS Estimate")
-                    rep_str = f", Reported EPS: INR {float(eps_rep):.2f}" if pd.notna(eps_rep) else ""
-                    est_str = f", Est EPS: INR {float(eps_est):.2f}" if pd.notna(eps_est) else ""
-                    raw_events.append({
-                        "type": "earnings",
-                        "date": d_str,
-                        "desc": f"Quarterly Earnings Release: {d_str}{rep_str}{est_str}"
-                    })
+                with ThreadPoolExecutor(max_workers=1) as pool:
+                    future = pool.submit(_fetch_yfinance_actions)
+                    raw_events = future.result(timeout=1.2)
         except Exception:
-            pass
+            raw_events = []
 
         cached_events = raw_events
         set_cached(cache_key, cached_events, ttl_seconds=86400)
@@ -174,11 +162,12 @@ async def fetch_news_for_event(
             found_articles.append(item)
             seen_titles.add(item["title"].lower())
 
-    async with httpx.AsyncClient(timeout=8.0) as client:
-        for q in [q1, q2]:
-            try:
-                encoded_q = urllib.parse.quote(q)
-                rss_url = f"https://news.google.com/rss/search?q={encoded_q}&hl=en-IN&gl=IN&ceid=IN:en"
+    async def _fetch_rss(query_str: str) -> List[Dict[str, Any]]:
+        entries_found = []
+        try:
+            encoded_q = urllib.parse.quote(query_str)
+            rss_url = f"https://news.google.com/rss/search?q={encoded_q}&hl=en-IN&gl=IN&ceid=IN:en"
+            async with httpx.AsyncClient(timeout=2.5) as client:
                 resp = await client.get(rss_url, headers=headers)
                 if resp.status_code == 200:
                     feed = feedparser.parse(resp.text)
@@ -186,17 +175,9 @@ async def fetch_news_for_event(
                         title = entry.get("title", "").strip()
                         if not title:
                             continue
-
-                        # Deduplicate by alpha-numeric characters
-                        clean_key = "".join(ch for ch in title.lower() if ch.isalnum())
-                        if clean_key in seen_titles:
-                            continue
-                        seen_titles.add(clean_key)
-
                         source_obj = entry.get("source", {})
                         source_title = source_obj.get("title") if isinstance(source_obj, dict) else "News Media"
                         link = entry.get("link", "")
-                        
                         pub_date_str = None
                         published_parsed = entry.get("published_parsed")
                         if published_parsed:
@@ -205,7 +186,7 @@ async def fetch_news_for_event(
                         else:
                             pub_date_str = event_date_str
 
-                        # Prioritize headlines that mention the company or bare symbol
+                        # Prioritize headlines mentioning company or symbol
                         relevance_score = 0
                         title_lower = title.lower()
                         if clean_name.lower() in title_lower:
@@ -216,15 +197,24 @@ async def fetch_news_for_event(
                             if kw in title_lower:
                                 relevance_score += 1
 
-                        found_articles.append({
+                        entries_found.append({
                             "title": title,
                             "source": source_title or "Google News",
                             "url": link,
                             "date": pub_date_str,
                             "relevance": relevance_score
                         })
-            except Exception:
-                pass
+        except Exception:
+            pass
+        return entries_found
+
+    feed_results = await asyncio.gather(_fetch_rss(q1), _fetch_rss(q2))
+    for entries in feed_results:
+        for item in entries:
+            clean_key = "".join(ch for ch in item["title"].lower() if ch.isalnum())
+            if clean_key not in seen_titles:
+                seen_titles.add(clean_key)
+                found_articles.append(item)
 
     # Sort by relevance descending, keep top 5
     found_articles.sort(key=lambda x: x.get("relevance", 0), reverse=True)

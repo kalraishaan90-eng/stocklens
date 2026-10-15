@@ -66,9 +66,9 @@ export const DesignSystemShowcase: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0B0D] text-editorial-primary font-sans antialiased selection:bg-gold/25 selection:text-editorial-primary film-grain-overlay relative pb-28">
+    <div className="min-h-screen bg-base text-editorial-primary font-sans antialiased selection:bg-pepper/25 selection:text-editorial-primary film-grain-overlay relative pb-28">
       {/* Top Fixed Utility Navigation Bar */}
-      <header className="sticky top-0 z-40 bg-[#0A0B0D]/90 backdrop-blur-xl border-b border-editorial-hairline px-4 sm:px-8 py-3.5 flex items-center justify-between">
+      <header className="sticky top-0 z-40 bg-base/90 backdrop-blur-xl border-b border-editorial-hairline px-4 sm:px-8 py-3.5 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <a
             href="/"
@@ -138,31 +138,35 @@ export const DesignSystemShowcase: React.FC = () => {
           </h1>
 
           <p className="text-base sm:text-lg text-editorial-secondary font-sans max-w-2xl leading-relaxed">
-            Constructed for high-density market comparison without SaaS cliches. Near-black warm
-            surfaces (#0A0B0D, #101215), hairline 1px borders, display serifs, tabular numerals,
-            and accessible financial semantics.
+            Constructed for high-density market comparison without SaaS cliches. Deep atmospheric
+            Black Stallion (#081919), Concealed Green surfaces (#223330), Iron River (#4D524B), Chain Link (#837F78),
+            and vivid Blood God & Pepper Red accents.
           </p>
 
-          <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-mono text-editorial-muted">
+          <div className="pt-2 flex flex-wrap items-center gap-3 text-xs font-mono text-editorial-muted">
             <div className="flex items-center gap-2 px-3 py-1.5 rounded bg-surface-card border border-editorial-hairline">
-              <span className="w-2 h-2 rounded-full bg-[#0A0B0D] border border-editorial-hairline" />
-              <span>Base #0A0B0D</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-[#081919] border border-editorial-hairline" />
+              <span>Black Stallion #081919</span>
             </div>
             <div className="flex items-center gap-2 px-3 py-1.5 rounded bg-surface-card border border-editorial-hairline">
-              <span className="w-2 h-2 rounded-full bg-gold" />
-              <span>Co. 1 Champagne #C9A96A</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-[#223330] border border-editorial-hairline" />
+              <span>Concealed Green #223330</span>
             </div>
             <div className="flex items-center gap-2 px-3 py-1.5 rounded bg-surface-card border border-editorial-hairline">
-              <span className="w-2 h-2 rounded-full bg-cyan" />
-              <span>Co. 2 Steel #6FB7D6</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-[#4D524B]" />
+              <span>Iron River #4D524B</span>
             </div>
             <div className="flex items-center gap-2 px-3 py-1.5 rounded bg-surface-card border border-editorial-hairline">
-              <span className="w-2 h-2 rounded-full bg-gain" />
-              <span>Gain #2FD08A</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-[#837F78]" />
+              <span>Chain Link #837F78</span>
             </div>
             <div className="flex items-center gap-2 px-3 py-1.5 rounded bg-surface-card border border-editorial-hairline">
-              <span className="w-2 h-2 rounded-full bg-loss" />
-              <span>Loss #FF5A4D</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-[#65060E]" />
+              <span>Blood God #65060E</span>
+            </div>
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded bg-surface-card border border-editorial-hairline">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#CE1A1E]" />
+              <span>Thunder Pepper #CE1A1E</span>
             </div>
           </div>
         </div>
@@ -266,96 +270,96 @@ export const DesignSystemShowcase: React.FC = () => {
           />
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {/* Base */}
+            {/* Black Stallion */}
             <div
-              onClick={() => copyToClipboard('#0A0B0D', 'base')}
-              className="group p-4 rounded-card bg-[#0A0B0D] border border-editorial-hairline shadow-hairline cursor-pointer hover:border-gold/40 transition-all"
+              onClick={() => copyToClipboard('#081919', 'blackStallion')}
+              className="group p-4 rounded-card bg-[#081919] border border-editorial-hairline shadow-hairline cursor-pointer hover:border-pepper/40 transition-all"
             >
-              <div className="w-full h-12 rounded bg-[#0A0B0D] border border-editorial-hairline mb-3" />
+              <div className="w-full h-12 rounded bg-[#081919] border border-editorial-hairline mb-3" />
               <div className="text-xs font-mono font-bold text-editorial-primary flex items-center justify-between">
-                <span>Base Dark</span>
-                {copiedToken === 'base' ? <Check className="w-3 h-3 text-gold" /> : <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />}
+                <span>Black Stallion</span>
+                {copiedToken === 'blackStallion' ? <Check className="w-3 h-3 text-pepper" /> : <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />}
               </div>
-              <div className="text-[11px] font-mono text-editorial-muted">#0A0B0D</div>
-              <div className="text-[10px] font-mono text-editorial-secondary mt-1">Background</div>
+              <div className="text-[11px] font-mono text-editorial-muted">#081919</div>
+              <div className="text-[10px] font-mono text-editorial-secondary mt-1">Base Canvas</div>
             </div>
 
-            {/* Surface */}
+            {/* Concealed Green */}
             <div
-              onClick={() => copyToClipboard('#101215', 'surface')}
-              className="group p-4 rounded-card bg-surface-card border border-editorial-hairline shadow-hairline cursor-pointer hover:border-gold/40 transition-all"
+              onClick={() => copyToClipboard('#223330', 'concealedGreen')}
+              className="group p-4 rounded-card bg-[#223330] border border-editorial-hairline shadow-hairline cursor-pointer hover:border-pepper/40 transition-all"
             >
-              <div className="w-full h-12 rounded bg-surface-card border border-editorial-hairline mb-3" />
+              <div className="w-full h-12 rounded bg-[#223330] border border-editorial-hairline mb-3" />
               <div className="text-xs font-mono font-bold text-editorial-primary flex items-center justify-between">
-                <span>Surface</span>
-                {copiedToken === 'surface' ? <Check className="w-3 h-3 text-gold" /> : <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />}
+                <span>Concealed Green</span>
+                {copiedToken === 'concealedGreen' ? <Check className="w-3 h-3 text-pepper" /> : <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />}
               </div>
-              <div className="text-[11px] font-mono text-editorial-muted">#101215</div>
-              <div className="text-[10px] font-mono text-editorial-secondary mt-1">Card Containers</div>
+              <div className="text-[11px] font-mono text-editorial-muted">#223330</div>
+              <div className="text-[10px] font-mono text-editorial-secondary mt-1">Surface & Cards</div>
             </div>
 
-            {/* Champagne Gold */}
+            {/* Iron River */}
             <div
-              onClick={() => copyToClipboard('#C9A96A', 'gold')}
-              className="group p-4 rounded-card bg-surface-card border border-editorial-hairline shadow-hairline cursor-pointer hover:border-gold/40 transition-all"
+              onClick={() => copyToClipboard('#4D524B', 'ironRiver')}
+              className="group p-4 rounded-card bg-surface-card border border-editorial-hairline shadow-hairline cursor-pointer hover:border-pepper/40 transition-all"
             >
-              <div className="w-full h-12 rounded bg-gold mb-3 flex items-center justify-center text-base font-bold text-xs font-mono">
-                Co. 1
+              <div className="w-full h-12 rounded bg-[#4D524B] mb-3 flex items-center justify-center text-editorial-primary font-bold text-xs font-mono">
+                Raised
               </div>
-              <div className="text-xs font-mono font-bold text-gold flex items-center justify-between">
-                <span>Champagne</span>
-                {copiedToken === 'gold' ? <Check className="w-3 h-3 text-gold" /> : <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />}
+              <div className="text-xs font-mono font-bold text-editorial-primary flex items-center justify-between">
+                <span>Iron River</span>
+                {copiedToken === 'ironRiver' ? <Check className="w-3 h-3 text-pepper" /> : <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />}
               </div>
-              <div className="text-[11px] font-mono text-editorial-muted">#C9A96A</div>
-              <div className="text-[10px] font-mono text-gain mt-1">7.4:1 AAA Pass</div>
+              <div className="text-[11px] font-mono text-editorial-muted">#4D524B</div>
+              <div className="text-[10px] font-mono text-editorial-secondary mt-1">Raised & Borders</div>
             </div>
 
-            {/* Steel Cyan */}
+            {/* Chain Link */}
             <div
-              onClick={() => copyToClipboard('#6FB7D6', 'cyan')}
-              className="group p-4 rounded-card bg-surface-card border border-editorial-hairline shadow-hairline cursor-pointer hover:border-cyan/40 transition-all"
+              onClick={() => copyToClipboard('#837F78', 'chainLink')}
+              className="group p-4 rounded-card bg-surface-card border border-editorial-hairline shadow-hairline cursor-pointer hover:border-pepper/40 transition-all"
             >
-              <div className="w-full h-12 rounded bg-cyan mb-3 flex items-center justify-center text-base font-bold text-xs font-mono">
-                Co. 2
+              <div className="w-full h-12 rounded bg-[#837F78] mb-3 flex items-center justify-center text-base font-bold text-xs font-mono">
+                Muted
               </div>
-              <div className="text-xs font-mono font-bold text-cyan flex items-center justify-between">
-                <span>Steel Cyan</span>
-                {copiedToken === 'cyan' ? <Check className="w-3 h-3 text-cyan" /> : <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />}
+              <div className="text-xs font-mono font-bold text-editorial-primary flex items-center justify-between">
+                <span>Chain Link</span>
+                {copiedToken === 'chainLink' ? <Check className="w-3 h-3 text-pepper" /> : <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />}
               </div>
-              <div className="text-[11px] font-mono text-editorial-muted">#6FB7D6</div>
-              <div className="text-[10px] font-mono text-gain mt-1">8.8:1 AAA Pass</div>
+              <div className="text-[11px] font-mono text-editorial-muted">#837F78</div>
+              <div className="text-[10px] font-mono text-editorial-secondary mt-1">4.9:1 AA Muted</div>
             </div>
 
-            {/* Refined Emerald Gain */}
+            {/* Blood God */}
             <div
-              onClick={() => copyToClipboard('#2FD08A', 'gain')}
-              className="group p-4 rounded-card bg-surface-card border border-editorial-hairline shadow-hairline cursor-pointer hover:border-gain/40 transition-all"
+              onClick={() => copyToClipboard('#65060E', 'bloodGod')}
+              className="group p-4 rounded-card bg-surface-card border border-editorial-hairline shadow-hairline cursor-pointer hover:border-blood/60 transition-all"
             >
-              <div className="w-full h-12 rounded bg-gain mb-3 flex items-center justify-center text-base font-bold text-xs font-mono">
-                +GAIN
+              <div className="w-full h-12 rounded bg-[#65060E] mb-3 flex items-center justify-center text-white font-bold text-xs font-mono">
+                Deep
               </div>
-              <div className="text-xs font-mono font-bold text-gain flex items-center justify-between">
-                <span>Gain Emerald</span>
-                {copiedToken === 'gain' ? <Check className="w-3 h-3 text-gain" /> : <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />}
+              <div className="text-xs font-mono font-bold text-red-300 flex items-center justify-between">
+                <span>Blood God</span>
+                {copiedToken === 'bloodGod' ? <Check className="w-3 h-3 text-pepper" /> : <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />}
               </div>
-              <div className="text-[11px] font-mono text-editorial-muted">#2FD08A</div>
-              <div className="text-[10px] font-mono text-gain mt-1">9.1:1 AAA Pass</div>
+              <div className="text-[11px] font-mono text-editorial-muted">#65060E</div>
+              <div className="text-[10px] font-mono text-editorial-secondary mt-1">Deep Crimson</div>
             </div>
 
-            {/* Muted Vermilion Loss */}
+            {/* Thunder Mountain Longhorn Pepper */}
             <div
-              onClick={() => copyToClipboard('#FF5A4D', 'loss')}
-              className="group p-4 rounded-card bg-surface-card border border-editorial-hairline shadow-hairline cursor-pointer hover:border-loss/40 transition-all"
+              onClick={() => copyToClipboard('#CE1A1E', 'thunderPepper')}
+              className="group p-4 rounded-card bg-surface-card border border-editorial-hairline shadow-hairline cursor-pointer hover:border-pepper/60 transition-all"
             >
-              <div className="w-full h-12 rounded bg-loss mb-3 flex items-center justify-center text-white font-bold text-xs font-mono">
-                -LOSS
+              <div className="w-full h-12 rounded bg-[#CE1A1E] mb-3 flex items-center justify-center text-white font-bold text-xs font-mono">
+                Accent
               </div>
-              <div className="text-xs font-mono font-bold text-loss flex items-center justify-between">
-                <span>Loss Vermilion</span>
-                {copiedToken === 'loss' ? <Check className="w-3 h-3 text-loss" /> : <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />}
+              <div className="text-xs font-mono font-bold text-pepper flex items-center justify-between">
+                <span>Thunder Pepper</span>
+                {copiedToken === 'thunderPepper' ? <Check className="w-3 h-3 text-pepper" /> : <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />}
               </div>
-              <div className="text-[11px] font-mono text-editorial-muted">#FF5A4D</div>
-              <div className="text-[10px] font-mono text-gain mt-1">6.2:1 AA Pass</div>
+              <div className="text-[11px] font-mono text-editorial-muted">#CE1A1E</div>
+              <div className="text-[10px] font-mono text-pepper-light mt-1">Vibrant Accent</div>
             </div>
           </div>
         </section>

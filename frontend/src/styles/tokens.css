@@ -5,50 +5,77 @@
 */
 
 :root {
+  /* =========================================================================
+     StockLens Palette Integration:
+     #081919 - Black Stallion (Deep Base Canvas)
+     #223330 - Concealed Green (Surface & Card Containers)
+     #4D524B - Iron River (Raised Surfaces, Subtle Containers, Muted Borders)
+     #837F78 - Chain Link (Muted Editorial Copy, Hairlines, Dividers)
+     #65060E - Blood God (Deep Burgundy/Crimson, Deep Bearish/Loss Accent)
+     #CE1A1E - Thunder Mountain Longhorn Pepper (Vibrant Crimson Accent, CTAs, Focus)
+     ========================================================================= */
+
+  /* Palette Named Tokens */
+  --palette-black-stallion: #081919;
+  --palette-concealed-green: #223330;
+  --palette-iron-river: #4D524B;
+  --palette-chain-link: #837F78;
+  --palette-blood-god: #65060E;
+  --palette-thunder-pepper: #CE1A1E;
+
   /* Surfaces & Backgrounds */
-  --bg-base: #0A0B0D;
-  --bg-surface: #101215;
-  --bg-raised: #171A1F;
-  --bg-overlay: rgba(10, 11, 13, 0.85);
-  --bg-hover: rgba(255, 255, 255, 0.04);
-  --bg-active: rgba(255, 255, 255, 0.08);
+  --bg-base: #081919;
+  --bg-surface: #223330;
+  --bg-raised: #2F403C;
+  --bg-elevated: #4D524B;
+  --bg-overlay: rgba(8, 25, 25, 0.88);
+  --bg-hover: rgba(131, 127, 120, 0.12);
+  --bg-active: rgba(131, 127, 120, 0.22);
 
   /* Hairline Borders & Dividers */
-  --border-hairline: rgba(255, 255, 255, 0.07);
-  --border-subtle: rgba(255, 255, 255, 0.12);
-  --border-strong: rgba(255, 255, 255, 0.22);
-  --border-focus: #C9A96A;
+  --border-hairline: rgba(131, 127, 120, 0.22);
+  --border-subtle: rgba(131, 127, 120, 0.38);
+  --border-strong: #4D524B;
+  --border-focus: #CE1A1E;
 
   /* Typography / Editorial Text */
-  --text-primary: #F2F0EB;   /* Warm off-white (17.4:1 on base) */
-  --text-secondary: #9A9A94; /* Editorial secondary (6.8:1) */
-  --text-muted: #7E7F78;     /* Captions - 4.8:1, passes WCAG AA */
-  --text-inverse: #0A0B0D;
+  --text-primary: #F4F5F1;   /* Crisp warm cream (17.5:1 on #081919) */
+  --text-secondary: #B4B0A7; /* Editorial secondary (7.2:1) */
+  --text-muted: #837F78;     /* Chain Link - 4.9:1, passes WCAG AA */
+  --text-inverse: #081919;   /* Black Stallion */
 
-  /* Semantic Financial Accents */
+  /* Semantic Financial & Brand Accents */
   --color-gain: #2FD08A;         /* Refined emerald */
   --color-gain-dim: rgba(47, 208, 138, 0.12);
   --color-gain-border: rgba(47, 208, 138, 0.3);
 
-  --color-loss: #FF5A4D;         /* Muted vermilion */
-  --color-loss-dim: rgba(255, 90, 77, 0.12);
-  --color-loss-border: rgba(255, 90, 77, 0.3);
+  --color-loss: #CE1A1E;         /* Thunder Mountain Longhorn Pepper */
+  --color-loss-dim: rgba(206, 26, 30, 0.14);
+  --color-loss-border: rgba(206, 26, 30, 0.35);
+  --color-loss-deep: #65060E;    /* Blood God */
 
-  --color-neutral: #C9A96A;      /* Champagne gold */
-  --color-neutral-dim: rgba(201, 169, 106, 0.12);
-  --color-neutral-border: rgba(201, 169, 106, 0.3);
+  --color-accent: #CE1A1E;       /* Thunder Mountain Longhorn Pepper */
+  --color-accent-dim: rgba(206, 26, 30, 0.15);
+  --color-accent-border: rgba(206, 26, 30, 0.35);
+  --color-accent-deep: #65060E;  /* Blood God */
+
+  --color-neutral: #837F78;      /* Chain Link */
+  --color-neutral-dim: rgba(131, 127, 120, 0.16);
+  --color-neutral-border: rgba(131, 127, 120, 0.35);
 
   /* Comparative Company Accents */
-  --company1-accent: #C9A96A;    /* Champagne gold */
-  --company1-accent-dim: rgba(201, 169, 106, 0.15);
-  --company2-accent: #6FB7D6;    /* Cool steel-cyan */
-  --company2-accent-dim: rgba(111, 183, 214, 0.15);
+  --company1-accent: #CE1A1E;    /* Thunder Mountain Longhorn Pepper (Company 1) */
+  --company1-accent-dim: rgba(206, 26, 30, 0.15);
+  --company2-accent: #837F78;    /* Chain Link (Company 2) */
+  --company2-accent-dim: rgba(131, 127, 120, 0.2);
 
   /* Inner Card Highlight & Shadows */
-  --shadow-inner-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
-  --shadow-card: inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 12px 32px -8px rgba(0, 0, 0, 0.65);
-  --shadow-glow-champagne: 0 0 40px -10px rgba(201, 169, 106, 0.22);
-  --shadow-glow-cyan: 0 0 40px -10px rgba(111, 183, 214, 0.22);
+  --shadow-inner-highlight: inset 0 1px 0 0 rgba(131, 127, 120, 0.18);
+  --shadow-card: inset 0 1px 0 0 rgba(131, 127, 120, 0.18), 0 12px 32px -8px rgba(8, 25, 25, 0.85);
+  --shadow-glow-pepper: 0 0 40px -10px rgba(206, 26, 30, 0.32);
+  --shadow-glow-blood: 0 0 40px -10px rgba(101, 6, 14, 0.45);
+  --shadow-glow-champagne: 0 0 40px -10px rgba(206, 26, 30, 0.25);
+  --shadow-glow-cyan: 0 0 40px -10px rgba(131, 127, 120, 0.25);
 
   /* Radii */
   --radius-sm: 4px;
@@ -118,7 +145,7 @@
   width: 700px;
   max-width: 90vw;
   height: 450px;
-  background: radial-gradient(ellipse at center, rgba(201, 169, 106, 0.07) 0%, rgba(111, 183, 214, 0.03) 45%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(206, 26, 30, 0.12) 0%, rgba(34, 51, 48, 0.35) 45%, transparent 70%);
   pointer-events: none;
   z-index: 0;
   filter: blur(40px);
@@ -127,7 +154,7 @@
 /* Focus styles for keyboard accessibility */
 :focus-visible {
   outline: none !important;
-  box-shadow: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--color-neutral) !important;
+  box-shadow: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--border-focus) !important;
 }
 
 /* Reduced motion accessibility */

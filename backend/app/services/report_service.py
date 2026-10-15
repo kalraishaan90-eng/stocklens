@@ -1192,33 +1192,56 @@ async def generate_pdf_report(
     </div>
     '''
 
-    async with async_playwright() as p:
-        # Launch browser with channels fallback
-        browser = None
-        for ch in ["msedge", "chrome", None]:
-            try:
-                if ch:
-                    browser = await p.chromium.launch(channel=ch, headless=True)
-                else:
-                    browser = await p.chromium.launch(headless=True)
-                break
-            except Exception:
-                continue
+    try:
+        async with async_playwright() as p:
+            # Launch browser with channels fallback
+            browser = None
+            for ch in ["msedge", "chrome", None]:
+                try:
+                    if ch:
+                        browser = await p.chromium.launch(channel=ch, headless=True)
+                    else:
+                        browser = await p.chromium.launch(headless=True)
+                    break
+                except Exception:
+                    continue
 
-        if not browser:
-            raise RuntimeError("Could not initialize Chromium browser for PDF rendering.")
+            if not browser:
+                raise RuntimeError("Could not initialize Chromium browser for PDF rendering.")
 
-        page = await browser.new_page()
-        await page.set_content(html_content, wait_until="networkidle")
+            page = await browser.new_page()
+            await page.set_content(html_content, wait_until="networkidle")
 
-        pdf_bytes = await page.pdf(
-            format="A4",
-            print_background=True,
-            display_header_footer=True,
-            header_template=header_template,
-            footer_template=footer_template,
-            margin={"top": "14mm", "bottom": "14mm", "left": "10mm", "right": "10mm"}
-        )
+            pdf_bytes = await page.pdf(
+                format="A4",
+                print_background=True,
+                display_header_footer=True,
+                header_template=header_template,
+                footer_template=footer_template,
+                margin={"top": "14mm", "bottom": "14mm", "left": "10mm", "right": "10mm"}
+            )
 
-        await browser.close()
+            await browser.close()
+            return pdf_bytes
+    except Exception as pw_err:
+        logger.warning(f"Playwright PDF generation failed ({pw_err}). Falling back to PyMuPDF document builder...")
+        import fitz
+        doc = fitz.open()
+        try:
+            story = fitz.Story(html=html_content)
+            rect = fitz.paper_rect("a4")
+            where = rect + (36, 36, -36, -36)
+            more = 1
+            while more:
+                page = doc.new_page(width=rect.width, height=rect.height)
+                more, _ = story.place(where)
+                story.draw(page)
+            pdf_bytes = doc.tobytes()
+        except Exception:
+            # Emergency simple text page if complex HTML story fails
+            page = doc.new_page()
+            page.insert_text((50, 50), f"StockLens Comparative Report: {analysis.company_a.info.name} vs {analysis.company_b.info.name}\nGenerated on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+            pdf_bytes = doc.tobytes()
+        finally:
+            doc.close()
         return pdf_bytes

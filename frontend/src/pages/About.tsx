@@ -31,13 +31,13 @@ const FORMULAS = [
     title: 'Compound annual growth rate',
     body: 'Geometric annualised return across the 730-day window.',
     formula: 'CAGR = (P_end / P_start)^(365.25 / Δdays) − 1',
-    cls: 'text-gold',
+    cls: 'text-pepper',
   },
   {
     title: 'Annualised volatility',
     body: 'Dispersion of daily returns scaled to 252 sessions.',
     formula: 'σ_ann = StdDev(daily returns) × √252',
-    cls: 'text-cyan',
+    cls: 'text-editorial-secondary',
   },
   {
     title: 'Maximum drawdown',
@@ -64,13 +64,13 @@ const RULES = [
     icon: AlertCircle,
     title: 'Rule 2 — correlation ≠ causation',
     body: 'A headline near a price move does not prove the headline caused it. Liquidity and sentiment move markets too.',
-    iconCls: 'text-gold',
+    iconCls: 'text-pepper',
   },
   {
     icon: ShieldCheck,
     title: 'Rule 3 — research use only',
     body: 'StockLens provides analytical equity research, not personal financial advice. Past performance never guarantees future returns.',
-    iconCls: 'text-cyan',
+    iconCls: 'text-editorial-secondary',
   },
 ];
 
@@ -80,7 +80,7 @@ export const About: React.FC = () => {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-10 sm:space-y-14">
         {/* Header */}
         <header className="text-center space-y-3">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/25 text-gold text-xs font-mono uppercase tracking-widest">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pepper/10 border border-pepper/30 text-pepper text-xs font-mono uppercase tracking-widest">
             Institutional Architecture
           </span>
           <h1 className="text-3xl sm:text-4xl font-serif tracking-tight">About StockLens</h1>
@@ -93,7 +93,7 @@ export const About: React.FC = () => {
         {/* Objectives */}
         <section aria-labelledby="objectives" className="card-highlight p-5 sm:p-8 space-y-5">
           <h2 id="objectives" className="text-xl font-serif flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-gold" aria-hidden="true" />
+            <BookOpen className="w-5 h-5 text-pepper" aria-hidden="true" />
             Objectives
           </h2>
           <p className="text-sm text-editorial-secondary leading-relaxed">
@@ -104,7 +104,7 @@ export const About: React.FC = () => {
           <ol className="grid grid-cols-1 sm:grid-cols-3 gap-4 list-none p-0 m-0">
             {OBJECTIVES.map((o) => (
               <li key={o.n} className="p-4 bg-surface-base rounded-md border border-editorial-hairline text-xs space-y-1.5">
-                <span className="font-mono text-[11px] font-bold text-gold tracking-widest">{o.n}</span>
+                <span className="font-mono text-[11px] font-bold text-pepper tracking-widest">{o.n}</span>
                 <p className="font-semibold text-editorial-primary text-sm">{o.title}</p>
                 <p className="text-editorial-secondary leading-relaxed">{o.body}</p>
               </li>
@@ -115,7 +115,7 @@ export const About: React.FC = () => {
         {/* Formulas */}
         <section aria-labelledby="formulas" className="card-highlight p-5 sm:p-8 space-y-5">
           <h2 id="formulas" className="text-xl font-serif flex items-center gap-2">
-            <Calculator className="w-5 h-5 text-gold" aria-hidden="true" />
+            <Calculator className="w-5 h-5 text-pepper" aria-hidden="true" />
             Mathematical formulations
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
@@ -134,7 +134,7 @@ export const About: React.FC = () => {
         {/* Compliance rules */}
         <section aria-labelledby="rules" className="card-highlight p-5 sm:p-8 space-y-5">
           <h2 id="rules" className="text-xl font-serif flex items-center gap-2">
-            <Scale className="w-5 h-5 text-gold" aria-hidden="true" />
+            <Scale className="w-5 h-5 text-pepper" aria-hidden="true" />
             Hard rules &amp; disclaimers
           </h2>
           <ul className="space-y-3 text-xs list-none p-0 m-0">

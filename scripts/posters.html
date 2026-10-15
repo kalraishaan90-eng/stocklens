@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>StockLens Maximalist Exhibition Posters - Experimental Art Direction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;500;700&family=Syne:wght@700;800;900&family=JetBrains+Mono:ital,wght@0,400;0,700;0,800;1,900&family=Cinzel:wght@900&family=Bebas+Neue&family=Unbounded:wght@800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-base: #060709;
+    --gold: #C9A96A;
+    --gold-glow: #FFDF9E;
+    --cyan: #6FB7D6;
+    --cyan-glow: #00F0FF;
+    --emerald: #2FD08A;
+    --vermilion: #FF4A3D;
+    --offwhite: #F4F2EC;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #020203;
+    color: var(--offwhite);
+    font-family: 'Space Grotesk', sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .preview-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+    padding: 40px 20px;
+  }
+
+  .poster-page {
+    width: 1200px;
+    height: 1697px;
+    position: relative;
+    background: var(--bg-base);
+    overflow: hidden;
+    page-break-after: always;
+    break-after: page;
+    box-shadow: 0 40px 100px -20px rgba(0,0,0,0.95), 0 0 0 1px rgba(201, 169, 106, 0.25);
+  }
+
+  @media print {
+    body { background: #000; padding: 0; }
+    .preview-wrapper { padding: 0; gap: 0; }
+    .poster-page {
+      width: 100vw;
+      height: 100vh;
+      page-break-after: always;
+      break-after: page;
+      box-shadow: none;
+    }
+    @page { size: A3 portrait; margin: 0; }
+  }
+
+  /* Textures & Grain */
+  .grain-heavy {
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 95;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    mix-blend-mode: overlay;
+  }
+
+  .scanlines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 90;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%);
+    background-size: 100% 4px;
+    opacity: 0.35;
+  }
+
+  /* Typography primitives */
+  .font-anton { font-family: 'Anton', sans-serif; }
+  .font-syne { font-family: 'Syne', sans-serif; }
+  .font-unbounded { font-family: 'Unbounded', sans-serif; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+  .font-cinzel { font-family: 'Cinzel', serif; }
+
+  /* Kinetic decorative typography marquee banner */
+  .ticker-tape {
+    display: flex;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    padding: 6px 0;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    text-transform: uppercase;
+  }
+
+  /* Brutalist Glitch/Offset text styles */
+  .outline-text {
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(242, 240, 235, 0.85);
+  }
+  .outline-gold {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--gold);
+  }
+  .outline-cyan {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--cyan);
+  }
+  .outline-vermilion {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--vermilion);
+  }
+
+  /* Tech stamps & stickers */
+  .brutalist-stamp {
+    position: absolute;
+    border: 2px solid;
+    padding: 10px 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 800;
+    text-transform: uppercase;
+    transform-origin: center;
+    z-index: 40;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.8);
+  }
+
+  .cross-marker {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    z-index: 50;
+  }
+  .cross-marker::before, .cross-marker::after {
+    content: '';
+    position: absolute;
+    background: rgba(255,255,255,0.3);
+  }
+  .cross-marker::before { top: 11px; left: 0; width: 24px; height: 2px; }
+  .cross-marker::after { top: 0; left: 11px; width: 2px; height: 24px; }
+
+  .halftone-circle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+</style>
+</head>
+<body>
+
+<div class="preview-wrapper">
+
+  <!-- =========================================================================
+       POSTER 1: "WAR OF THE DUAL TICKER" (RAW BRUTALIST FINANCIAL COLISEUM)
+       ========================================================================= -->
+  <section class="poster-page" id="poster-1">
+    <div class="grain-heavy"></div>
+    <div class="scanlines"></div>
+
+    <!-- Massive Halftone Radial Energy in Background -->
+    <div style="position: absolute; top: 46%; left: 50%; transform: translate(-50%, -50%); width: 1100px; height: 1100px; background: radial-gradient(circle, rgba(201, 169, 106, 0.22) 0%, rgba(111, 183, 214, 0.12) 38%, rgba(6,7,9,0) 70%); z-index: 2;"></div>
+
+    <!-- Background Giant Ghost Typography -->
+    <div class="font-anton" style="position: absolute; top: 160px; left: -20px; font-size: 280px; line-height: 0.8; color: rgba(255,255,255,0.025); letter-spacing: -0.05em; pointer-events: none; z-index: 1;">
+      BATTLE<br>COGNITION<br>ALPHA
+    </div>
+
+    <!-- Technical Cross Markers -->
+    <div class="cross-marker" style="top: 36px; left: 36px;"></div>
+    <div class="cross-marker" style="top: 36px; right: 36px;"></div>
+    <div class="cross-marker" style="bottom: 36px; left: 36px;"></div>
+    <div class="cross-marker" style="bottom: 36px; right: 36px;"></div>
+    <div class="cross-marker" style="top: 50%; left: 36px;"></div>
+    <div class="cross-marker" style="top: 50%; right: 36px;"></div>
+
+    <!-- Poster Canvas Frame -->
+    <div style="position: relative; z-index: 10; padding: 48px; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+
+      <!-- Top Header Row -->
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid rgba(255,255,255,0.2); padding-bottom: 16px;">
+          <div class="font-mono">
+            <div style="font-size: 14px; font-weight: 800; color: var(--gold); letter-spacing: 0.2em;">[ STOCKLENS // SYSTEM OVERRIDE 01 ]</div>
+            <div style="font-size: 10px; color: var(--offwhite); opacity: 0.6; margin-top: 2px;">NSE/BSE DUAL-EQUITY FORENSIC ENGINE &bull; COVARIANCE DEPLOYMENT</div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <span class="font-mono" style="background: var(--gold); color: #000; font-weight: 900; font-size: 11px; padding: 4px 10px;">EXHIBITION EDITION</span>
+            <span class="font-mono" style="border: 1px solid var(--cyan); color: var(--cyan); font-weight: 800; font-size: 11px; padding: 4px 10px;">LATENCY: 12ms</span>
+          </div>
+        </div>
+
+        <!-- Ticker Tape Ribbon -->
+        <div class="ticker-tape" style="color: var(--gold); border-color: rgba(201,169,106,0.3); margin-top: 12px;">
+          <span>&bull; HDFC BANK [HDFCBANK.NS] +38.4% YoY &bull; BAJAJ FINSERV [BAJAJFINSV.NS] +22.1% YoY &bull; SHARPE: 1.84 &bull; FII FLOWS: +$1.4B &bull; REGULATORY ARBITRAGE SCAN: ACTIVE &bull; NO BIAS CONFIRMED &bull;</span>
+        </div>
+
+        <!-- Colossal Maximalist Headline Stack -->
+        <div style="margin-top: 28px; position: relative;">
+          <div class="font-mono" style="font-size: 14px; color: var(--cyan); letter-spacing: 0.4em; text-transform: uppercase; margin-bottom: -4px;">
+            // HEAD-TO-HEAD CAPITAL CONFLICT
+          </div>
+          <h1 class="font-anton" style="font-size: 156px; line-height: 0.82; letter-spacing: -0.03em; text-transform: uppercase;">
+            TWO TITANS.<br>
+            <span class="outline-gold">ONE VERDICT.</span><br>
+            <span style="color: var(--cyan); text-shadow: 0 0 35px rgba(111, 183, 214, 0.4);">ZERO MERCY.</span>
+          </h1>
+
+          <!-- Stamp Floating Over Text -->
+          <div class="brutalist-stamp" style="top: 20px; right: 20px; border-color: var(--vermilion); color: var(--vermilion); background: rgba(10,11,13,0.95); transform: rotate(8deg);">
+            <div style="font-size: 16px; font-weight: 900;">UNBIASED ALGORITHM</div>
+            <div style="font-size: 9px; opacity: 0.8;">DISPENSING SPECULATION</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center Maximalist Visual Arena (Ascii Matrix + Kinetic Vector Clash) -->
+      <div style="position: relative; height: 640px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.12); background: rgba(10,12,16,0.7); backdrop-filter: blur(8px);">
+        
+        <!-- Corner Accents of Arena -->
+        <div style="position: absolute; top: -1px; left: -1px; width: 16px; height: 16px; border-top: 3px solid var(--gold); border-left: 3px solid var(--gold);"></div>
+        <div style="position: absolute; top: -1px; right: -1px; width: 16px; height: 16px; border-top: 3px solid var(--gold); border-right: 3px solid var(--gold);"></div>
+        <div style="position: absolute; bottom: -1px; left: -1px; width: 16px; height: 16px; border-bottom: 3px solid var(--gold); border-left: 3px solid var(--gold);"></div>
+        <div style="position: absolute; bottom: -1px; right: -1px; width: 16px; height: 16px; border-bottom: 3px solid var(--gold); border-right: 3px solid var(--gold);"></div>
+
+        <!-- Vertical Coordinates Bar Left -->
+        <div class="font-mono" style="position: absolute; left: 16px; top: 20px; bottom: 20px; writing-mode: vertical-lr; transform: rotate(180deg); font-size: 10px; color: var(--offwhite); opacity: 0.4; letter-spacing: 0.3em;">
+          STOCKLENS//CORE_DATASET//VALUATION_MOMENTUM_VOLATILITY//LATITUDE:28.6139//LONGITUDE:77.2090
+        </div>
+
+        <!-- Arena SVG Graphics: Distorted Polar Grid, Giant Concentric Crosshairs & Vector Paths -->
+        <svg style="position: absolute; inset: 0; width: 100%; height: 100%;" viewBox="0 0 1100 640">
+          <defs>
+            <linearGradient id="goldBeam" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#C9A96A" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#8A6E35" stop-opacity="0.1"/>
+            </linearGradient>
+            <linearGradient id="cyanBeam" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#38D9F5" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#6FB7D6" stop-opacity="0.1"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Massive Background Crosshair / Sunburst Rays -->
+          <g stroke="rgba(255,255,255,0.06)" stroke-width="1">
+            <line x1="550" y1="0" x2="550" y2="640"/>
+            <line x1="0" y1="320" x2="1100" y2="320"/>
+            <line x1="0" y1="0" x2="1100" y2="640"/>
+            <line x1="0" y1="640" x2="1100" y2="0"/>
+            <circle cx="550" cy="320" r="100" fill="none" stroke-dasharray="4,4"/>
+            <circle cx="550" cy="320" r="200" fill="none"/>
+            <circle cx="550" cy="320" r="280" fill="none" stroke-dasharray="8,6"/>
+          </g>
+
+          <!-- Kinetic Clash Lightning/Vector Polyline: Gold Competitor (Left Domination) -->
+          <polygon points="120,440 280,260 480,140 550,220 380,500 210,540" 
+                   fill="url(#goldBeam)" stroke="#C9A96A" stroke-width="3" style="filter: drop-shadow(0 0 20px rgba(201,169,106,0.6));"/>
+
+          <!-- Cyan Competitor Polyline (Right Counter-Attack) -->
+          <polygon points="980,200 820,380 620,500 550,420 720,140 890,100" 
+                   fill="url(#cyanBeam)" stroke="#38D9F5" stroke-width="3" style="filter: drop-shadow(0 0 20px rgba(56,217,245,0.6));"/>
+
+          <!-- High-Energy Impact Nodes -->
+          <circle cx="480" cy="140" r="8" fill="#FFF" stroke="#C9A96A" stroke-width="4"/>
+          <circle cx="620" cy="500" r="8" fill="#FFF" stroke="#38D9F5" stroke-width="4"/>
+          <circle cx="550" cy="320" r="12" fill="#2FD08A" stroke="#FFF" stroke-width="3" style="filter: drop-shadow(0 0 25px #2FD08A);"/>
+        </svg>
+
+        <!-- Giant Typography Clashing Inside the Arena -->
+        <div style="position: absolute; top: 40px; left: 80px; z-index: 20;">
+          <div class="font-mono" style="font-size: 13px; color: var(--gold); font-weight: 800; letter-spacing: 0.15em;">// CONCURRENT LEADER</div>
+          <div class="font-unbounded" style="font-size: 54px; font-weight: 900; line-height: 0.9; color: #FFF; text-shadow: 0 4px 20px rgba(0,0,0,0.8);">
+            HDFC BANK
+          </div>
+          <div class="font-mono" style="font-size: 16px; color: var(--gold); font-weight: 700; margin-top: 6px;">
+            PRICE: ₹1,684.20 &bull; <span style="background: rgba(47,208,138,0.2); color: var(--emerald); padding: 2px 6px;">+18.4% ALPHA</span>
+          </div>
+        </div>
+
+        <div style="position: absolute; bottom: 40px; right: 80px; text-align: right; z-index: 20;">
+          <div class="font-mono" style="font-size: 13px; color: var(--cyan); font-weight: 800; letter-spacing: 0.15em;">// HIGH-BETA CHALLENGER</div>
+          <div class="font-unbounded" style="font-size: 54px; font-weight: 900; line-height: 0.9; color: #FFF; text-shadow: 0 4px 20px rgba(0,0,0,0.8);">
+            BAJAJ FINSERV
+          </div>
+          <div class="font-mono" style="font-size: 16px; color: var(--cyan); font-weight: 700; margin-top: 6px;">
+            PRICE: ₹1,892.45 &bull; <span style="background: rgba(111,183,214,0.2); color: var(--cyan); padding: 2px 6px;">BETA: 1.42</span>
+          </div>
+        </div>
+
+        <!-- Center Brutalist Focal Badge (THE DECISION) -->
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 30; text-align: center;">
+          <div style="background: #000; border: 3px solid var(--gold); padding: 18px 36px; box-shadow: 0 0 50px rgba(201, 169, 106, 0.5), inset 0 0 20px rgba(201,169,106,0.2); transform: rotate(-3deg);">
+            <div class="font-mono" style="font-size: 11px; letter-spacing: 0.3em; color: var(--gold);">CONVICTION ALGORITHM</div>
+            <div class="font-anton" style="font-size: 58px; line-height: 0.85; color: #FFF; margin: 4px 0;">OUTPERFORM</div>
+            <div class="font-mono" style="font-size: 14px; font-weight: 800; color: var(--emerald);">HDFC TAKES CAPITAL ALLOCATION</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Brutalist Information Architecture & Call to Action -->
+      <div>
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+          <!-- Dense Ratio Breakdown -->
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); padding: 16px 20px;">
+            <div class="font-mono" style="font-size: 11px; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 8px;">MULTI-DIMENSIONAL DECONSTRUCTION</div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;" class="font-mono">
+              <div>
+                <div style="font-size: 10px; color: var(--offwhite); opacity: 0.6;">VALUATION GAP</div>
+                <div style="font-size: 16px; font-weight: 800; color: #FFF;">-38.2% P/E</div>
+              </div>
+              <div>
+                <div style="font-size: 10px; color: var(--offwhite); opacity: 0.6;">NET INTEREST MARGIN</div>
+                <div style="font-size: 16px; font-weight: 800; color: var(--emerald);">3.64% HIGH</div>
+              </div>
+              <div>
+                <div style="font-size: 10px; color: var(--offwhite); opacity: 0.6;">VOLATILITY RISK</div>
+                <div style="font-size: 16px; font-weight: 800; color: var(--gold);">LOW DRAWDOWN</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Booth Coordinate Card -->
+          <div style="background: rgba(201, 169, 106, 0.12); border: 2px solid var(--gold); padding: 16px 20px; display: flex; flex-direction: column; justify-content: center;">
+            <div class="font-mono" style="font-size: 10px; color: var(--gold); letter-spacing: 0.2em;">EXHIBITION DOCK</div>
+            <div class="font-syne" style="font-size: 26px; font-weight: 900; color: #FFF; margin: 2px 0;">TERMINAL #01</div>
+            <div class="font-mono" style="font-size: 11px; color: var(--offwhite); opacity: 0.8;">TOUCH TO LAUNCH PAIR</div>
+          </div>
+
+          <!-- System Status -->
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); padding: 16px 20px; display: flex; flex-direction: column; justify-content: center;">
+            <div class="font-mono" style="font-size: 10px; color: var(--cyan); letter-spacing: 0.2em;">MODEL ENGINE</div>
+            <div class="font-anton" style="font-size: 28px; color: #FFF;">V4.8 QUANT</div>
+            <div class="font-mono" style="font-size: 10px; color: var(--emerald); font-weight: 700;">● ZERO HUMAN BIAS</div>
+          </div>
+        </div>
+
+        <!-- Footer Coordinates -->
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 12px;" class="font-mono">
+          <div style="font-size: 11px; color: var(--offwhite); opacity: 0.5;">POSTER SPEC: MAXIMALIST EX-01 // VECTOR COGNITION // 2026</div>
+          <div style="font-size: 11px; color: var(--gold); letter-spacing: 0.2em;">STOCKLENS &bull; HIGH INTENSITY ASSET INTELLIGENCE</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       POSTER 2: "CRASH FORENSICS & REBOUND" (EXPERIMENTAL TECHNICAL VOLATILITY)
+       ========================================================================= -->
+  <section class="poster-page" id="poster-2">
+    <div class="grain-heavy"></div>
+    <div class="scanlines"></div>
+
+    <!-- Red-Cyan Volatility Tension Glow -->
+    <div style="position: absolute; top: 40%; left: 30%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(255, 74, 61, 0.28) 0%, rgba(6,7,9,0) 65%); z-index: 2;"></div>
+    <div style="position: absolute; bottom: 30%; right: 20%; width: 900px; height: 900px; background: radial-gradient(circle, rgba(47, 208, 138, 0.22) 0%, rgba(6,7,9,0) 65%); z-index: 2;"></div>
+
+    <!-- Massive Ghost Typography -->
+    <div class="font-anton" style="position: absolute; bottom: 80px; right: -40px; font-size: 260px; line-height: 0.8; color: rgba(255,255,255,0.02); letter-spacing: -0.05em; pointer-events: none; z-index: 1;">
+      COLLAPSE<br>DECONSTRUCT<br>ASCENT
+    </div>
+
+    <!-- Technical Cross Markers -->
+    <div class="cross-marker" style="top: 36px; left: 36px;"></div>
+    <div class="cross-marker" style="top: 36px; right: 36px;"></div>
+    <div class="cross-marker" style="bottom: 36px; left: 36px;"></div>
+    <div class="cross-marker" style="bottom: 36px; right: 36px;"></div>
+
+    <!-- Canvas Frame -->
+    <div style="position: relative; z-index: 10; padding: 48px; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+      
+      <!-- Top Section -->
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid rgba(255, 74, 61, 0.3); padding-bottom: 16px;">
+          <div class="font-mono">
+            <div style="font-size: 14px; font-weight: 800; color: var(--vermilion); letter-spacing: 0.2em;">[ FORENSIC DEEP-SCAN // INCIDENT REPORT 02 ]</div>
+            <div style="font-size: 10px; color: var(--offwhite); opacity: 0.6; margin-top: 2px;">NEURAL ATTRIBUTION &bull; 730 TRADING DAYS OF NEWS SENTIMENT ARCHIVED</div>
+          </div>
+          <div class="font-mono" style="border: 1px solid var(--vermilion); color: var(--vermilion); font-weight: 800; font-size: 11px; padding: 4px 10px; background: rgba(255,74,61,0.1);">
+            CRITICAL VOLATILITY EVENT
+          </div>
+        </div>
+
+        <!-- Ticker Tape -->
+        <div class="ticker-tape" style="color: var(--vermilion); border-color: rgba(255, 74, 61, 0.3); margin-top: 12px;">
+          <span>&bull; FLASH CRASH: -42.8% &bull; CATALYST: SEBI INJUNCTION &bull; FII DUMP: ₹4,200 CR &bull; MOMENTUM EXHAUSTION REACHED &bull; LIQUIDITY ABSORPTION &bull; ASYMMETRIC REBOUND: +112% &bull;</span>
+        </div>
+
+        <!-- Giant Typography Header -->
+        <div style="margin-top: 28px; position: relative;">
+          <div class="font-mono" style="font-size: 14px; color: var(--vermilion); letter-spacing: 0.4em; text-transform: uppercase;">
+            // FORENSIC TIMELINE INVESTIGATION
+          </div>
+          <h1 class="font-anton" style="font-size: 154px; line-height: 0.82; letter-spacing: -0.03em; text-transform: uppercase;">
+            WHY DID IT<br>
+            <span class="outline-vermilion">HEMORRHAGE?</span><br>
+            <span style="color: var(--emerald); text-shadow: 0 0 35px rgba(47, 208, 138, 0.4);">HOW DID IT RISE?</span>
+          </h1>
+
+          <div class="brutalist-stamp" style="top: 15px; right: 10px; border-color: var(--gold); color: var(--gold); background: #000; transform: rotate(-5deg);">
+            <div style="font-size: 15px; font-weight: 900;">100% NEWS PROOF</div>
+            <div style="font-size: 9px; opacity: 0.8;">EVERY DISLOCATION PROVEN</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center Maximalist Forensic Chart & Crash Waves -->
+      <div style="position: relative; height: 640px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.12); background: rgba(10,12,16,0.85); overflow: hidden;">
+        
+        <!-- Vector Price Action Curve (Extreme Voltage Splatter / Cyberpunk Candlesticks) -->
+        <svg style="position: absolute; inset: 0; width: 100%; height: 100%;" viewBox="0 0 1100 640">
+          <defs>
+            <linearGradient id="crashFill" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#FF4A3D" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="#FF4A3D" stop-opacity="0.0"/>
+            </linearGradient>
+            <linearGradient id="rallyFill" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#2FD08A" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="#2FD08A" stop-opacity="0.0"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Heavy Horizontal Price Level Rulers -->
+          <g stroke="rgba(255,255,255,0.08)" stroke-width="1">
+            <line x1="0" y1="120" x2="1100" y2="120"/>
+            <line x1="0" y1="240" x2="1100" y2="240"/>
+            <line x1="0" y1="360" x2="1100" y2="360"/>
+            <line x1="0" y1="480" x2="1100" y2="480"/>
+          </g>
+
+          <!-- Drawdown Fill Area -->
+          <path d="M 60,140 L 260,110 L 400,160 L 520,520 L 720,440 L 920,200 L 1040,110 L 1040,640 L 60,640 Z" fill="url(#crashFill)"/>
+
+          <!-- High-Intensity Thick Price Line -->
+          <path d="M 60,140 L 260,110 L 400,160 L 520,520" fill="none" stroke="#FF4A3D" stroke-width="7" stroke-linecap="round"/>
+          <path d="M 520,520 L 720,440 L 920,200 L 1040,110" fill="none" stroke="#2FD08A" stroke-width="7" stroke-linecap="round"/>
+
+          <!-- Laser Target Rings over Crash Pivot Point -->
+          <circle cx="520" cy="520" r="14" fill="#FF4A3D" stroke="#FFF" stroke-width="4"/>
+          <circle cx="520" cy="520" r="32" fill="none" stroke="#FF4A3D" stroke-width="2" stroke-dasharray="6,4"/>
+          <circle cx="520" cy="520" r="50" fill="none" stroke="#FF4A3D" stroke-width="1"/>
+
+          <!-- Peak Ring -->
+          <circle cx="400" cy="160" r="10" fill="#FFF" stroke="#FF4A3D" stroke-width="3"/>
+          <circle cx="1040" cy="110" r="10" fill="#FFF" stroke="#2FD08A" stroke-width="3"/>
+        </svg>
+
+        <!-- Floating Forensic Dossiers Over Chart -->
+        <div style="position: absolute; top: 30px; left: 320px; width: 340px; background: #000; border: 2px solid var(--vermilion); padding: 16px; box-shadow: 6px 6px 0px rgba(255,74,61,0.4);">
+          <div class="font-mono" style="font-size: 11px; color: var(--vermilion); font-weight: 800;">CATALYST 01 // SUDDEN SELL-OFF</div>
+          <div class="font-syne" style="font-size: 18px; font-weight: 900; color: #FFF; margin: 4px 0;">SEBI Promoter Pledge Revocation</div>
+          <div class="font-mono" style="font-size: 11px; color: var(--offwhite); opacity: 0.8; line-height: 1.5;">
+            Mass margin call triggered across domestic brokerages. 18.2 million shares dumped within a 90-minute trading window.
+          </div>
+        </div>
+
+        <div style="position: absolute; bottom: 30px; left: 380px; width: 360px; background: #000; border: 2px solid var(--gold); padding: 16px; box-shadow: 6px 6px 0px rgba(201,169,106,0.4);">
+          <div class="font-mono" style="font-size: 11px; color: var(--gold); font-weight: 800;">CATALYST 02 // INSTITUTIONAL FLOOR</div>
+          <div class="font-syne" style="font-size: 18px; font-weight: 900; color: #FFF; margin: 4px 0;">Consortium Debt Restructure</div>
+          <div class="font-mono" style="font-size: 11px; color: var(--offwhite); opacity: 0.8; line-height: 1.5;">
+            Sovereign wealth fund steps in with equity injection. Insolvency risk immediately eliminated. Asymmetric upside opens.
+          </div>
+        </div>
+
+        <div style="position: absolute; top: 40px; right: 40px; width: 320px; background: #000; border: 2px solid var(--emerald); padding: 16px; box-shadow: 6px 6px 0px rgba(47,208,138,0.4);">
+          <div class="font-mono" style="font-size: 11px; color: var(--emerald); font-weight: 800;">CATALYST 03 // FULL RESURGENCE</div>
+          <div class="font-syne" style="font-size: 18px; font-weight: 900; color: #FFF; margin: 4px 0;">Q2 EBITDA Explosion +94%</div>
+          <div class="font-mono" style="font-size: 11px; color: var(--offwhite); opacity: 0.8; line-height: 1.5;">
+            Export order book reaches all-time peak. Complete V-shaped recovery to new 52-week breakout highs.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Forensic Callouts -->
+      <div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+          <div style="background: rgba(255,74,61,0.1); border: 1px solid var(--vermilion); padding: 18px;">
+            <div class="font-mono" style="font-size: 11px; color: var(--vermilion); font-weight: 800;">MAX DRAWDOWN</div>
+            <div class="font-anton" style="font-size: 42px; color: #FFF; line-height: 0.9; margin: 6px 0;">-42.8%</div>
+            <div class="font-mono" style="font-size: 10px; color: var(--offwhite); opacity: 0.7;">PANIC LIQUIDATION PHASE</div>
+          </div>
+          <div style="background: rgba(201,169,106,0.1); border: 1px solid var(--gold); padding: 18px;">
+            <div class="font-mono" style="font-size: 11px; color: var(--gold); font-weight: 800;">REBOUND DURATION</div>
+            <div class="font-anton" style="font-size: 42px; color: #FFF; line-height: 0.9; margin: 6px 0;">118 DAYS</div>
+            <div class="font-mono" style="font-size: 10px; color: var(--offwhite); opacity: 0.7;">INSTITUTIONAL ACCUMULATION</div>
+          </div>
+          <div style="background: rgba(47,208,138,0.1); border: 1px solid var(--emerald); padding: 18px;">
+            <div class="font-mono" style="font-size: 11px; color: var(--emerald); font-weight: 800;">TOTAL RETURN</div>
+            <div class="font-anton" style="font-size: 42px; color: var(--emerald); line-height: 0.9; margin: 6px 0;">+112.4%</div>
+            <div class="font-mono" style="font-size: 10px; color: var(--offwhite); opacity: 0.7;">PARABOLIC EXPANSION</div>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 12px;" class="font-mono">
+          <div style="font-size: 11px; color: var(--offwhite); opacity: 0.5;">POSTER SPEC: MAXIMALIST EX-02 // INCIDENT ARCHITECTURE // 2026</div>
+          <div style="font-size: 11px; color: var(--vermilion); letter-spacing: 0.2em;">STOCKLENS &bull; ATTRIBUTION GUARANTEE</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       POSTER 3: "QUANT RATIO OVERDRIVE" (TECHNICAL TERMINAL TYPOGRAPHY & VECTOR RADAR)
+       ========================================================================= -->
+  <section class="poster-page" id="poster-3">
+    <div class="grain-heavy"></div>
+    <div class="scanlines"></div>
+
+    <!-- Cyan / Gold Energy Core -->
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 1000px; height: 1000px; background: radial-gradient(circle, rgba(111, 183, 214, 0.22) 0%, rgba(201, 169, 106, 0.12) 40%, rgba(6,7,9,0) 70%); z-index: 2;"></div>
+
+    <!-- Background Blueprint Grid Pattern -->
+    <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(111,183,214,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(111,183,214,0.06) 1px, transparent 1px); background-size: 30px 30px; pointer-events: none; z-index: 1;"></div>
+
+    <!-- Cross Markers -->
+    <div class="cross-marker" style="top: 36px; left: 36px;"></div>
+    <div class="cross-marker" style="top: 36px; right: 36px;"></div>
+    <div class="cross-marker" style="bottom: 36px; left: 36px;"></div>
+    <div class="cross-marker" style="bottom: 36px; right: 36px;"></div>
+
+    <div style="position: relative; z-index: 10; padding: 48px; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+
+      <!-- Header -->
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid rgba(111, 183, 214, 0.3); padding-bottom: 16px;">
+          <div class="font-mono">
+            <div style="font-size: 14px; font-weight: 800; color: var(--cyan); letter-spacing: 0.2em;">[ FACTOR ENGINE SPEC // QUANT MATRIX 03 ]</div>
+            <div style="font-size: 10px; color: var(--offwhite); opacity: 0.6; margin-top: 2px;">MULTI-FACTOR CROSS CORRELATION &bull; 6 QUANT DIMENSIONS LIVE</div>
+          </div>
+          <div class="font-mono" style="border: 1px solid var(--cyan); color: var(--cyan); font-weight: 800; font-size: 11px; padding: 4px 10px;">
+            RAW MATHEMATICAL ADVANTAGE
+          </div>
+        </div>
+
+        <div class="ticker-tape" style="color: var(--cyan); border-color: rgba(111, 183, 214, 0.3); margin-top: 12px;">
+          <span>&bull; P/E COMPRESSION: 18.2x &bull; ROCE EXPANSION: 34.8% &bull; FCF CONVERSION: 114% &bull; DEBT/EQUITY FORTRESS: 0.08x &bull; GROSS MARGIN SPREAD: +460 BPS &bull; SHARPE: 1.92 &bull;</span>
+        </div>
+
+        <!-- Colossal Headline -->
+        <div style="margin-top: 28px; position: relative;">
+          <div class="font-mono" style="font-size: 14px; color: var(--gold); letter-spacing: 0.4em; text-transform: uppercase;">
+            // FACTOR ALPHA ARCHITECTURE
+          </div>
+          <h1 class="font-anton" style="font-size: 154px; line-height: 0.82; letter-spacing: -0.03em; text-transform: uppercase;">
+            WEAPONIZED<br>
+            <span class="outline-cyan">BALANCE SHEETS.</span><br>
+            <span style="color: var(--gold); text-shadow: 0 0 35px rgba(201, 169, 106, 0.4);">UNFILTERED MATH.</span>
+          </h1>
+
+          <div class="brutalist-stamp" style="top: 20px; right: 10px; border-color: var(--cyan); color: var(--cyan); background: #000; transform: rotate(6deg);">
+            <div style="font-size: 15px; font-weight: 900;">6 VECTORS SCANNED</div>
+            <div style="font-size: 9px; opacity: 0.8;">INSTITUTIONAL PRECISION</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center Maximalist 6-Card Factor Explosion -->
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 16px 0;">
+        
+        <!-- Factor 1: Valuation -->
+        <div style="background: rgba(10,12,16,0.9); border: 2px solid var(--gold); padding: 24px; position: relative; box-shadow: 8px 8px 0px rgba(201,169,106,0.25);">
+          <div class="font-mono" style="font-size: 11px; color: var(--gold); font-weight: 800;">[ FACTOR 01 // VALUE ]</div>
+          <div class="font-syne" style="font-size: 26px; font-weight: 900; color: #FFF; margin: 6px 0 2px 0;">VALUATION</div>
+          <div class="font-anton" style="font-size: 72px; color: var(--gold); line-height: 0.9;">18.2x</div>
+          <div class="font-mono" style="font-size: 11px; color: var(--offwhite); opacity: 0.8; margin-top: 8px;">
+            Discount to sector peers: 32%. Substantial margin of safety confirmed.
+          </div>
+        </div>
+
+        <!-- Factor 2: ROCE -->
+        <div style="background: rgba(10,12,16,0.9); border: 2px solid var(--cyan); padding: 24px; position: relative; box-shadow: 8px 8px 0px rgba(111,183,214,0.25);">
+          <div class="font-mono" style="font-size: 11px; color: var(--cyan); font-weight: 800;">[ FACTOR 02 // QUALITY ]</div>
+          <div class="font-syne" style="font-size: 26px; font-weight: 900; color: #FFF; margin: 6px 0 2px 0;">ROCE ALPHA</div>
+          <div class="font-anton" style="font-size: 72px; color: var(--cyan); line-height: 0.9;">34.8%</div>
+          <div class="font-mono" style="font-size: 11px; color: var(--offwhite); opacity: 0.8; margin-top: 8px;">
+            Elite return on capital employed. Consistent reinvestment compounding.
+          </div>
+        </div>
+
+        <!-- Factor 3: FCF Yield -->
+        <div style="background: rgba(10,12,16,0.9); border: 2px solid var(--emerald); padding: 24px; position: relative; box-shadow: 8px 8px 0px rgba(47,208,138,0.25);">
+          <div class="font-mono" style="font-size: 11px; color: var(--emerald); font-weight: 800;">[ FACTOR 03 // CASH ]</div>
+          <div class="font-syne" style="font-size: 26px; font-weight: 900; color: #FFF; margin: 6px 0 2px 0;">FREE CASH FLOW</div>
+          <div class="font-anton" style="font-size: 72px; color: var(--emerald); line-height: 0.9;">6.4%</div>
+          <div class="font-mono" style="font-size: 11px; color: var(--offwhite); opacity: 0.8; margin-top: 8px;">
+            Operating cash conversion outstrips reported accounting profits.
+          </div>
+        </div>
+
+        <!-- Factor 4: Solvency -->
+        <div style="background: rgba(10,12,16,0.9); border: 2px solid var(--gold); padding: 24px; position: relative; box-shadow: 8px 8px 0px rgba(201,169,106,0.25);">
+          <div class="font-mono" style="font-size: 11px; color: var(--gold); font-weight: 800;">[ FACTOR 04 // BALANCE ]</div>
+          <div class="font-syne" style="font-size: 26px; font-weight: 900; color: #FFF; margin: 6px 0 2px 0;">DEBT / EQUITY</div>
+          <div class="font-anton" style="font-size: 72px; color: var(--gold); line-height: 0.9;">0.08x</div>
+          <div class="font-mono" style="font-size: 11px; color: var(--offwhite); opacity: 0.8; margin-top: 8px;">
+            Fortress balance sheet completely insulated from central bank rate spikes.
+          </div>
+        </div>
+
+        <!-- Factor 5: Momentum -->
+        <div style="background: rgba(10,12,16,0.9); border: 2px solid var(--cyan); padding: 24px; position: relative; box-shadow: 8px 8px 0px rgba(111,183,214,0.25);">
+          <div class="font-mono" style="font-size: 11px; color: var(--cyan); font-weight: 800;">[ FACTOR 05 // VELOCITY ]</div>
+          <div class="font-syne" style="font-size: 26px; font-weight: 900; color: #FFF; margin: 6px 0 2px 0;">RSI MOMENTUM</div>
+          <div class="font-anton" style="font-size: 72px; color: var(--cyan); line-height: 0.9;">64.2</div>
+          <div class="font-mono" style="font-size: 11px; color: var(--offwhite); opacity: 0.8; margin-top: 8px;">
+            Strong accumulation slope without speculative retail froth.
+          </div>
+        </div>
+
+        <!-- Factor 6: Moat -->
+        <div style="background: rgba(10,12,16,0.9); border: 2px solid var(--emerald); padding: 24px; position: relative; box-shadow: 8px 8px 0px rgba(47,208,138,0.25);">
+          <div class="font-mono" style="font-size: 11px; color: var(--emerald); font-weight: 800;">[ FACTOR 06 // MOAT ]</div>
+          <div class="font-syne" style="font-size: 26px; font-weight: 900; color: #FFF; margin: 6px 0 2px 0;">PRICING POWER</div>
+          <div class="font-anton" style="font-size: 72px; color: var(--emerald); line-height: 0.9;">+460 bps</div>
+          <div class="font-mono" style="font-size: 11px; color: var(--offwhite); opacity: 0.8; margin-top: 8px;">
+            Gross margin expansion sustained over 8 consecutive fiscal cycles.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Status Banner -->
+      <div>
+        <div style="background: #000; border: 2px solid rgba(255,255,255,0.2); padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+          <div>
+            <div class="font-mono" style="font-size: 11px; color: var(--gold); letter-spacing: 0.2em;">OVERALL STOCKLENS RATING</div>
+            <div class="font-anton" style="font-size: 32px; color: #FFF;">91.4 COMPOSITE EFFICIENCY SCORE</div>
+          </div>
+          <div class="font-mono" style="text-align: right;">
+            <div style="font-size: 14px; font-weight: 800; color: var(--emerald);">TOP 3% OF UNIVERSE</div>
+            <div style="font-size: 10px; color: var(--offwhite); opacity: 0.6;">TESTED ON 2,400+ LISTED TICKERS</div>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 12px;" class="font-mono">
+          <div style="font-size: 11px; color: var(--offwhite); opacity: 0.5;">POSTER SPEC: MAXIMALIST EX-03 // QUANT ARCHITECTURE // 2026</div>
+          <div style="font-size: 11px; color: var(--cyan); letter-spacing: 0.2em;">STOCKLENS &bull; FACTOR INTEGRATION</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       POSTER 4: "THE MANIFESTO OF TRUTH" (BRUTALIST EXHIBITION CALL TO ARMS)
+       ========================================================================= -->
+  <section class="poster-page" id="poster-4">
+    <div class="grain-heavy"></div>
+    <div class="scanlines"></div>
+
+    <!-- Massive Center Cosmic Core -->
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 1150px; height: 1150px; background: radial-gradient(circle, rgba(201, 169, 106, 0.25) 0%, rgba(111, 183, 214, 0.15) 35%, rgba(6,7,9,0) 70%); z-index: 2;"></div>
+
+    <!-- Background Blueprint Typography -->
+    <div class="font-anton" style="position: absolute; top: 220px; left: -20px; font-size: 260px; line-height: 0.8; color: rgba(255,255,255,0.025); letter-spacing: -0.05em; pointer-events: none; z-index: 1;">
+      EVIDENCE<br>OVER<br>HYPE
+    </div>
+
+    <!-- Cross Markers -->
+    <div class="cross-marker" style="top: 36px; left: 36px;"></div>
+    <div class="cross-marker" style="top: 36px; right: 36px;"></div>
+    <div class="cross-marker" style="bottom: 36px; left: 36px;"></div>
+    <div class="cross-marker" style="bottom: 36px; right: 36px;"></div>
+
+    <div style="position: relative; z-index: 10; padding: 48px; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+
+      <!-- Header -->
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid rgba(255,255,255,0.2); padding-bottom: 16px;">
+          <div class="font-mono">
+            <div style="font-size: 14px; font-weight: 800; color: var(--gold); letter-spacing: 0.2em;">[ THE EXHIBITION MANIFESTO // 04 ]</div>
+            <div style="font-size: 10px; color: var(--offwhite); opacity: 0.6; margin-top: 2px;">STOCKLENS TERMINAL &bull; EXHIBITION BOOTH #01 OPEN ACCESS</div>
+          </div>
+          <div class="font-mono" style="background: var(--gold); color: #000; font-weight: 900; font-size: 11px; padding: 4px 10px;">
+            JOIN THE EXPERIMENT
+          </div>
+        </div>
+
+        <div class="ticker-tape" style="color: var(--gold); border-color: rgba(201,169,106,0.3); margin-top: 12px;">
+          <span>&bull; FINANCIAL TV IS ENTERTAINMENT &bull; STOCKLENS IS TRUTH &bull; STEP FORWARD &bull; TYPE ANY TWO TICKERS &bull; TEST YOUR CONVICTION LIVE &bull;</span>
+        </div>
+
+        <!-- Colossal Headline -->
+        <div style="margin-top: 28px; position: relative;">
+          <div class="font-mono" style="font-size: 14px; color: var(--cyan); letter-spacing: 0.4em; text-transform: uppercase;">
+            // ANNOUNCING THE SYSTEM
+          </div>
+          <h1 class="font-anton" style="font-size: 154px; line-height: 0.82; letter-spacing: -0.03em; text-transform: uppercase;">
+            KILL THE NOISE.<br>
+            <span class="outline-gold">BELIEVE THE</span><br>
+            <span style="color: #FFF; text-shadow: 0 0 40px rgba(255, 255, 255, 0.4);">EVIDENCE.</span>
+          </h1>
+
+          <div class="brutalist-stamp" style="top: 25px; right: 10px; border-color: var(--emerald); color: var(--emerald); background: #000; transform: rotate(-8deg);">
+            <div style="font-size: 16px; font-weight: 900;">STEP UP &amp; TOUCH</div>
+            <div style="font-size: 9px; opacity: 0.8;">LIVE KIOSK READY</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center Maximalist Architecture Cards (The 4 Pillars of Truth) -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 16px 0;">
+        
+        <div style="background: rgba(10,12,16,0.9); border: 2px solid var(--gold); padding: 26px; box-shadow: 8px 8px 0px rgba(201,169,106,0.3);">
+          <div class="font-mono" style="font-size: 12px; color: var(--gold); font-weight: 800;">01 // PAIRWISE SUPREMACY</div>
+          <div class="font-syne" style="font-size: 26px; font-weight: 900; color: #FFF; margin: 6px 0;">The Head-to-Head Arena</div>
+          <p class="font-mono" style="font-size: 12px; color: var(--offwhite); opacity: 0.8; line-height: 1.6;">
+            Never evaluate an equity in isolation. We pit competitors in direct combat across valuation multiples, capital efficiency, and market share moat.
+          </p>
+        </div>
+
+        <div style="background: rgba(10,12,16,0.9); border: 2px solid var(--cyan); padding: 26px; box-shadow: 8px 8px 0px rgba(111,183,214,0.3);">
+          <div class="font-mono" style="font-size: 12px; color: var(--cyan); font-weight: 800;">02 // ZERO NARRATIVE BIAS</div>
+          <div class="font-syne" style="font-size: 26px; font-weight: 900; color: #FFF; margin: 6px 0;">Mathematical Verdicts</div>
+          <p class="font-mono" style="font-size: 12px; color: var(--offwhite); opacity: 0.8; line-height: 1.6;">
+            Algorithms don't watch sensational news broadcasts. We filter out boardroom PR spin to expose the cold, empirical cash generation truth.
+          </p>
+        </div>
+
+        <div style="background: rgba(10,12,16,0.9); border: 2px solid var(--vermilion); padding: 26px; box-shadow: 8px 8px 0px rgba(255,74,61,0.3);">
+          <div class="font-mono" style="font-size: 12px; color: var(--vermilion); font-weight: 800;">03 // FORENSIC EXPLANATION</div>
+          <div class="font-syne" style="font-size: 26px; font-weight: 900; color: #FFF; margin: 6px 0;">Historical Dislocation Pinpoint</div>
+          <p class="font-mono" style="font-size: 12px; color: var(--offwhite); opacity: 0.8; line-height: 1.6;">
+            Every market panic and breakout explained down to the exact corporate filing, SEBI announcement, or supply shock that ignited it.
+          </p>
+        </div>
+
+        <div style="background: rgba(10,12,16,0.9); border: 2px solid var(--emerald); padding: 26px; box-shadow: 8px 8px 0px rgba(47,208,138,0.3);">
+          <div class="font-mono" style="font-size: 12px; color: var(--emerald); font-weight: 800;">04 // INSTITUTIONAL CONVICTION</div>
+          <div class="font-syne" style="font-size: 26px; font-weight: 900; color: #FFF; margin: 6px 0;">Decisive Outperformer Calls</div>
+          <p class="font-mono" style="font-size: 12px; color: var(--offwhite); opacity: 0.8; line-height: 1.6;">
+            No vague hedging or analyst double-speak. StockLens gives an uncompromising conviction score for long-term capital compounding.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Bottom Interactive Terminal Invitation Banner -->
+      <div>
+        <div style="background: #000; border: 3px solid var(--gold); padding: 24px 32px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 0 50px rgba(201,169,106,0.35); margin-bottom: 24px;">
+          <div>
+            <div class="font-mono" style="font-size: 12px; color: var(--gold); letter-spacing: 0.3em; font-weight: 800;">EXHIBITION EXPERIENCE OPEN</div>
+            <div class="font-anton" style="font-size: 40px; color: #FFF; line-height: 0.95; margin-top: 4px;">
+              COMMAND THE TERMINAL AT BOOTH #01
+            </div>
+            <div class="font-mono" style="font-size: 12px; color: var(--offwhite); opacity: 0.8; margin-top: 4px;">
+              Enter any 2 companies (Apple vs Microsoft, TCS vs Infosys, Zomato vs Swiggy). Watch the machine dissect them live.
+            </div>
+          </div>
+          <div class="font-mono" style="text-align: right;">
+            <div style="background: var(--gold); color: #000; font-weight: 900; font-size: 16px; padding: 12px 24px; display: inline-block;">
+              START LIVE DEMO &rarr;
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 12px;" class="font-mono">
+          <div style="font-size: 11px; color: var(--offwhite); opacity: 0.5;">POSTER SPEC: MAXIMALIST EX-04 // EXHIBITION MANIFESTO // 2026</div>
+          <div style="font-size: 11px; color: var(--gold); letter-spacing: 0.2em;">STOCKLENS &bull; ARCHITECTED FOR TRUTH</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>

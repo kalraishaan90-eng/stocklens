@@ -77,7 +77,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({
         : accent === 'company2'
         ? '#6FB7D6'
         : isNegative
-        ? '#FF5A4D'
+        ? '#CE1A1E'
         : '#2FD08A';
 
     const gradientId = `sparkline-grad-${label.replace(/[^a-zA-Z0-9]/g, '-')}`;

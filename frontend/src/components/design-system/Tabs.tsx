@@ -84,12 +84,12 @@ export const Tabs: React.FC<TabsProps> = ({
             onClick={() => onChange(tab.id)}
             onKeyDown={(e) => handleKeyDown(e, idx)}
             className={clsx(
-              'relative flex items-center gap-2 font-medium transition-all duration-200 cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-md',
+              'relative flex items-center gap-2 font-medium transition-all duration-200 cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pepper rounded-md',
               size === 'sm' ? 'px-3 py-1.5 text-xs' : 'px-4 py-2 text-sm',
               variant === 'underline' && [
                 'border-b-2 -mb-[2px] transition-colors',
                 isActive
-                  ? 'border-gold text-editorial-primary font-semibold'
+                  ? 'border-pepper text-editorial-primary font-semibold'
                   : 'border-transparent text-editorial-secondary hover:text-editorial-primary hover:border-editorial-hairline',
               ],
               variant === 'pill' && [
@@ -108,7 +108,7 @@ export const Tabs: React.FC<TabsProps> = ({
                 className={clsx(
                   'text-[10px] font-mono px-1.5 py-0.2 rounded-full border',
                   isActive
-                    ? 'bg-gold/20 text-gold border-gold/30 font-bold'
+                    ? 'bg-pepper/20 text-pepper border-pepper/30 font-bold'
                     : 'bg-surface-raised text-editorial-muted border-editorial-hairline'
                 )}
               >

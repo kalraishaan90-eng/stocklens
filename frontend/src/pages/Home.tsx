@@ -33,11 +33,11 @@ const POPULAR_COMPARISONS: Array<[string, string, string]> = [
 
 // Guided discovery steps shown while the backend computes
 const STEPS = [
-  { icon: Globe, label: 'Fetching 2 years of prices', color: 'text-gold' },
-  { icon: LineChart, label: 'Calculating moving averages', color: 'text-cyan' },
-  { icon: Activity, label: 'Scanning for sudden moves', color: 'text-gold' },
-  { icon: Search, label: 'Reading the news', color: 'text-cyan' },
-  { icon: Award, label: 'Preparing the verdict', color: 'text-gold' },
+  { icon: Globe, label: 'Fetching 2 years of prices', color: 'text-pepper' },
+  { icon: LineChart, label: 'Calculating moving averages', color: 'text-editorial-secondary' },
+  { icon: Activity, label: 'Scanning for sudden moves', color: 'text-pepper' },
+  { icon: Search, label: 'Reading the news', color: 'text-editorial-secondary' },
+  { icon: Award, label: 'Preparing the verdict', color: 'text-pepper' },
 ];
 
 /**
@@ -426,14 +426,14 @@ export const Home: React.FC = () => {
       <main className="flex-1 w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pb-12">
         {/* ---------- Hero (cinematic, full-width) ---------- */}
         <div className="relative hero-radial-glow py-8 sm:py-14 lg:py-18 text-center">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,169,106,0.06),transparent_60%)] pointer-events-none" aria-hidden="true" />
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/25 text-gold text-[11px] font-mono uppercase tracking-widest mb-4 relative z-10">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(206,26,30,0.08),transparent_60%)] pointer-events-none" aria-hidden="true" />
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pepper/10 border border-pepper/30 text-pepper text-[11px] font-mono uppercase tracking-widest mb-4 relative z-10">
             <BadgeCheck className="w-3 h-3" aria-hidden="true" />
             Institutional Equity Analytics · Live Market Data
           </span>
 
           <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-hero-lg font-normal tracking-tight leading-[1.02] max-w-4xl mx-auto relative z-10">
-            Two stocks. <span className="text-gold italic">One verdict.</span>{' '}
+            Two stocks. <span className="text-pepper italic">One verdict.</span>{' '}
             <span className="font-normal text-editorial-primary">And the reason behind every move.</span>
           </h1>
 
@@ -509,7 +509,7 @@ export const Home: React.FC = () => {
 
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-lg bg-gold text-surface-base hover:bg-gold/90 font-semibold transition-all duration-200 shadow-[0_0_20px_-6px_rgba(201,169,106,0.4)] cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-lg bg-pepper text-white hover:bg-pepper-light font-semibold transition-all duration-200 shadow-glow-pepper cursor-pointer"
               >
                 <span>Analyse both stocks</span>
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />

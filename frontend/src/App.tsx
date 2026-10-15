@@ -65,7 +65,7 @@ function StockLensApp() {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen bg-[#0A0B0D] text-editorial-primary flex flex-col font-sans film-grain-overlay">
+    <div className="min-h-screen bg-base text-editorial-primary flex flex-col font-sans film-grain-overlay">
       <Navbar />
       <div className="flex-1">
         <Suspense fallback={<div className="min-h-[40vh] grid place-items-center text-sm text-editorial-muted">Loading section</div>}>

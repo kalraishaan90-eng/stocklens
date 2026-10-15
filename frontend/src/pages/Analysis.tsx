@@ -55,11 +55,11 @@ const TerminalChart = lazy(() => import('../components/design-system/TerminalCha
 
 // Staged progress steps (matches the Home page five-step workflow)
 const STEPS = [
-  { icon: Globe, label: 'Fetching 2 years of prices', color: 'text-gold' },
-  { icon: Activity, label: 'Calculating moving averages', color: 'text-cyan' },
-  { icon: AlertTriangle, label: 'Scanning for sudden moves', color: 'text-gold' },
-  { icon: Search, label: 'Reading the news', color: 'text-cyan' },
-  { icon: Award, label: 'Preparing the verdict', color: 'text-gold' },
+  { icon: Globe, label: 'Fetching 2 years of prices', color: 'text-pepper' },
+  { icon: Activity, label: 'Calculating moving averages', color: 'text-editorial-secondary' },
+  { icon: AlertTriangle, label: 'Scanning for sudden moves', color: 'text-pepper' },
+  { icon: Search, label: 'Reading the news', color: 'text-editorial-secondary' },
+  { icon: Award, label: 'Preparing the verdict', color: 'text-pepper' },
 ];
 
 const MiniNav: React.FC<{
@@ -82,7 +82,7 @@ const MiniNav: React.FC<{
               onClick={() => scrollTo(s.id)}
               className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-mono transition-colors ${
                 active === s.id
-                  ? 'bg-gold/10 text-gold border border-gold/30'
+                  ? 'bg-pepper/15 text-pepper border border-pepper/35'
                   : 'text-editorial-secondary hover:text-editorial-primary hover:bg-surface-hover'
               }`}
               aria-current={active === s.id ? 'page' : undefined}
@@ -342,7 +342,7 @@ const SectionCharts: React.FC<{
                 type="button"
                 onClick={() => setScale('rebased')}
                 aria-pressed={scale === 'rebased'}
-                className={`px-2.5 py-1 rounded-md transition-all cursor-pointer font-medium ${scale === 'rebased' ? 'bg-gold text-surface-base font-semibold shadow-sm' : 'text-editorial-secondary hover:text-editorial-primary'}`}
+                className={`px-2.5 py-1 rounded-md transition-all cursor-pointer font-medium ${scale === 'rebased' ? 'bg-pepper text-white font-semibold shadow-sm' : 'text-editorial-secondary hover:text-editorial-primary'}`}
               >
                 Rebased to 100
               </button>
@@ -350,7 +350,7 @@ const SectionCharts: React.FC<{
                 type="button"
                 onClick={() => setScale('actual')}
                 aria-pressed={scale === 'actual'}
-                className={`px-2.5 py-1 rounded-md transition-all cursor-pointer font-medium ${scale === 'actual' ? 'bg-gold text-surface-base font-semibold shadow-sm' : 'text-editorial-secondary hover:text-editorial-primary'}`}
+                className={`px-2.5 py-1 rounded-md transition-all cursor-pointer font-medium ${scale === 'actual' ? 'bg-pepper text-white font-semibold shadow-sm' : 'text-editorial-secondary hover:text-editorial-primary'}`}
               >
                 Actual (₹)
               </button>
@@ -365,7 +365,7 @@ const SectionCharts: React.FC<{
                 type="button"
                 onClick={() => setView('monthly')}
                 aria-pressed={view === 'monthly'}
-                className={`px-2.5 py-1 rounded-md transition-all cursor-pointer font-medium ${view === 'monthly' ? 'bg-gold text-surface-base font-semibold shadow-sm' : 'text-editorial-secondary hover:text-editorial-primary'}`}
+                className={`px-2.5 py-1 rounded-md transition-all cursor-pointer font-medium ${view === 'monthly' ? 'bg-pepper text-white font-semibold shadow-sm' : 'text-editorial-secondary hover:text-editorial-primary'}`}
               >
                 Monthly
               </button>
@@ -373,7 +373,7 @@ const SectionCharts: React.FC<{
                 type="button"
                 onClick={() => setView('daily')}
                 aria-pressed={view === 'daily'}
-                className={`px-2.5 py-1 rounded-md transition-all cursor-pointer font-medium ${view === 'daily' ? 'bg-gold text-surface-base font-semibold shadow-sm' : 'text-editorial-secondary hover:text-editorial-primary'}`}
+                className={`px-2.5 py-1 rounded-md transition-all cursor-pointer font-medium ${view === 'daily' ? 'bg-pepper text-white font-semibold shadow-sm' : 'text-editorial-secondary hover:text-editorial-primary'}`}
               >
                 Daily
               </button>
@@ -567,9 +567,9 @@ const SkeletonStory: React.FC<{ visible: boolean }> = ({ visible }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         {/* Navbar-equivalent banner */}
         <div className="flex items-center gap-3 p-3 rounded-lg bg-surface-card border border-editorial-hairline space-y-2">
-          <div className="h-3 w-3 rounded-full bg-gold animate-bounce" />
-          <div className="h-3 w-3 rounded-full bg-cyan animate-bounce" style={{ animationDelay: '150ms' }} />
-          <div className="h-3 w-3 rounded-full bg-gold animate-bounce" style={{ animationDelay: '300ms' }} />
+          <div className="h-3 w-3 rounded-full bg-pepper animate-bounce" />
+          <div className="h-3 w-3 rounded-full bg-blood animate-bounce" style={{ animationDelay: '150ms' }} />
+          <div className="h-3 w-3 rounded-full bg-chain animate-bounce" style={{ animationDelay: '300ms' }} />
         </div>
 
         {/* Section 01 skeleton */}

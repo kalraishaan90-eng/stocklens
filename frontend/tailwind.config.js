@@ -8,23 +8,49 @@ export default {
   theme: {
     extend: {
       colors: {
-        // StockLens Luxury Terminal & Editorial Palette
-        base: '#0A0B0D',
+        // StockLens Natural Editorial & Terminal Palette
+        base: '#081919', // Black Stallion
         surface: {
-          DEFAULT: '#101215',
-          base: '#0A0B0D',
-          card: '#101215',
-          raised: '#171A1F',
-          subtle: '#1C2027',
-          hover: 'rgba(255, 255, 255, 0.04)',
+          DEFAULT: '#223330', // Concealed Green
+          base: '#081919',    // Black Stallion
+          card: '#223330',    // Concealed Green
+          raised: '#2F403C',  // Elevated Concealed Green
+          elevated: '#4D524B',// Iron River
+          subtle: '#1C2A28',  // Deep tint
+          hover: 'rgba(131, 127, 120, 0.12)',
         },
         editorial: {
-          primary: '#F2F0EB',   // Warm off-white (17.4:1 on base)
-          secondary: '#9A9A94', // Editorial secondary (6.8:1)
-          muted: '#7E7F78',     // Captions (4.8:1 - passes WCAG AA)
-          hairline: 'rgba(255, 255, 255, 0.07)',
-          subtle: 'rgba(255, 255, 255, 0.12)',
-          strong: 'rgba(255, 255, 255, 0.22)',
+          primary: '#F4F5F1',   // Warm off-white (17.5:1 on Black Stallion)
+          secondary: '#B4B0A7', // Warm secondary (7.2:1)
+          muted: '#837F78',     // Chain Link (4.9:1 - passes WCAG AA)
+          hairline: 'rgba(131, 127, 120, 0.22)',
+          subtle: 'rgba(131, 127, 120, 0.38)',
+          strong: '#4D524B',    // Iron River
+        },
+        // Palette Specific Colors
+        palette: {
+          blackStallion: '#081919',
+          concealedGreen: '#223330',
+          ironRiver: '#4D524B',
+          chainLink: '#837F78',
+          bloodGod: '#65060E',
+          thunderPepper: '#CE1A1E',
+        },
+        stallion: '#081919',
+        concealed: '#223330',
+        iron: '#4D524B',
+        chain: '#837F78',
+        blood: {
+          DEFAULT: '#65060E',
+          muted: 'rgba(101, 6, 14, 0.18)',
+          border: 'rgba(101, 6, 14, 0.45)',
+        },
+        pepper: {
+          DEFAULT: '#CE1A1E',
+          muted: 'rgba(206, 26, 30, 0.14)',
+          border: 'rgba(206, 26, 30, 0.35)',
+          deep: '#65060E',
+          light: '#E8383D',
         },
         // Semantic Financial Colors
         gain: {
@@ -34,19 +60,20 @@ export default {
           light: '#61E4A9',
         },
         loss: {
-          DEFAULT: '#FF5A4D',   // Muted vermilion
-          muted: 'rgba(255, 90, 77, 0.12)',
-          border: 'rgba(255, 90, 77, 0.3)',
-          light: '#FF8178',
+          DEFAULT: '#CE1A1E',   // Thunder Mountain Longhorn Pepper
+          muted: 'rgba(206, 26, 30, 0.14)',
+          border: 'rgba(206, 26, 30, 0.35)',
+          deep: '#65060E',      // Blood God
+          light: '#E8383D',
         },
         gold: {
-          DEFAULT: '#C9A96A',   // Champagne gold (Neutral / Info / Company 1)
+          DEFAULT: '#C9A96A',   // Champagne gold (Neutral / Info / Company 1 fallback)
           muted: 'rgba(201, 169, 106, 0.12)',
           border: 'rgba(201, 169, 106, 0.3)',
           light: '#DCBF85',
         },
         cyan: {
-          DEFAULT: '#6FB7D6',   // Cool steel-cyan (Company 2)
+          DEFAULT: '#6FB7D6',   // Cool steel-cyan (Company 2 fallback)
           muted: 'rgba(111, 183, 214, 0.12)',
           border: 'rgba(111, 183, 214, 0.3)',
           light: '#91CBE3',
@@ -65,8 +92,8 @@ export default {
           900: '#14532d',
         },
         slate: {
-          850: '#151f32',
-          950: '#0A0B0D',
+          850: '#1C2A28',
+          950: '#081919',
         },
       },
       fontFamily: {
@@ -85,10 +112,12 @@ export default {
         card: '12px',
       },
       boxShadow: {
-        hairline: 'inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 12px 32px -8px rgba(0, 0, 0, 0.65)',
-        'hairline-sm': 'inset 0 1px 0 0 rgba(255, 255, 255, 0.07)',
-        'glow-gold': '0 0 35px -8px rgba(201, 169, 106, 0.25)',
-        'glow-cyan': '0 0 35px -8px rgba(111, 183, 214, 0.25)',
+        hairline: 'inset 0 1px 0 0 rgba(131, 127, 120, 0.18), 0 12px 32px -8px rgba(8, 25, 25, 0.85)',
+        'hairline-sm': 'inset 0 1px 0 0 rgba(131, 127, 120, 0.18)',
+        'glow-pepper': '0 0 35px -8px rgba(206, 26, 30, 0.35)',
+        'glow-blood': '0 0 35px -8px rgba(101, 6, 14, 0.45)',
+        'glow-gold': '0 0 35px -8px rgba(206, 26, 30, 0.25)',
+        'glow-cyan': '0 0 35px -8px rgba(131, 127, 120, 0.25)',
       },
       animation: {
         'fadeIn': 'fadeIn 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards',

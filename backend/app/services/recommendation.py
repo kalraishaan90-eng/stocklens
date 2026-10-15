@@ -26,7 +26,7 @@ LIMITATIONS: List[str] = [
     "Excludes post-fetch developments: Breaking corporate news, regulatory announcements, or macroeconomic shocks after the data fetch timestamp are not incorporated.",
     "Excludes taxes & personal goals: Does not take into account individual tax brackets, transaction costs, liquidity needs, or investment horizon.",
     "Past performance disclaimer: Historical performance and return trends do not guarantee or predict future financial returns.",
-    "Research tool only: StockLens is built strictly for computational equity research and analytical comparison and does not constitute registered investment advice. Consult a licensed financial adviser before investing."
+    "Not SEBI-registered: StockLens is built strictly for computational equity research and analytical comparison and does not constitute SEBI-registered investment advice. Consult a licensed financial adviser before investing."
 ]
 
 def compute_rsi(prices: pd.Series, period: int = 14) -> float:

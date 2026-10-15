@@ -4,7 +4,7 @@ import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'ghost' | 'outline' | 'champagne' | 'cyan';
+  variant?: 'primary' | 'ghost' | 'outline' | 'champagne' | 'cyan' | 'pepper' | 'blood';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
   leftIcon?: React.ReactNode;
@@ -28,7 +28,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     // Base editorial styling: crisp hairline borders, 8px grid alignment, max 12px radius, smooth 200ms ease-out
     const baseStyles =
-      'inline-flex items-center justify-center font-medium font-sans select-none tracking-tight transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-base disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none active:scale-[0.98]';
+      'inline-flex items-center justify-center font-medium font-sans select-none tracking-tight transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pepper focus-visible:ring-offset-2 focus-visible:ring-offset-base disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none active:scale-[0.98]';
 
     const sizes = {
       sm: 'text-xs px-3 py-1.5 rounded-md gap-1.5 h-8',
@@ -46,6 +46,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       // Outline: Deliberate editorial wireframe with hairline border
       outline:
         'bg-surface-card text-editorial-primary border border-editorial-hairline hover:border-editorial-subtle hover:bg-surface-raised shadow-hairline-sm',
+      // Thunder Pepper Red Accent (Vibrant Palette CTA)
+      pepper:
+        'bg-pepper text-white font-semibold hover:bg-pepper-light border border-pepper/40 shadow-glow-pepper',
+      // Blood God Burgundy Accent (Deep Palette CTA)
+      blood:
+        'bg-blood text-white font-semibold hover:bg-blood/90 border border-blood-border shadow-glow-blood',
       // Champagne Gold Accent (Company 1 / Neutral Highlight)
       champagne:
         'bg-gold text-base font-semibold hover:bg-gold-light border border-gold/40 shadow-glow-gold',

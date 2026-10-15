@@ -317,6 +317,11 @@ class MarketContext(BaseModel):
         val = _sanitize_float_val(v, default=0.0)
         return val if val is not None else 0.0
 
+    @field_validator("sector_return_pct", mode="before")
+    @classmethod
+    def clean_sector_return(cls, v: Any) -> Optional[float]:
+        return _sanitize_float_val(v, default=None)
+
 class PriceMovementEvent(BaseModel):
     date: str
     change_pct: float

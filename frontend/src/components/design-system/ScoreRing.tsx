@@ -62,7 +62,7 @@ export const ScoreRing: React.FC<ScoreRingProps> = ({
       tierLabel = 'BALANCED';
       TierIcon = Award;
     } else {
-      resolvedColor = '#FF5A4D'; // vermilion
+      resolvedColor = '#CE1A1E'; // Thunder Mountain Longhorn Pepper
       tierLabel = 'UNDERPERFORM';
       TierIcon = AlertTriangle;
     }
@@ -79,7 +79,7 @@ export const ScoreRing: React.FC<ScoreRingProps> = ({
     tierLabel = 'SUPERIOR';
     TierIcon = ShieldCheck;
   } else if (accent === 'loss') {
-    resolvedColor = '#FF5A4D';
+    resolvedColor = '#CE1A1E';
     tierLabel = 'DEFICIT';
     TierIcon = AlertTriangle;
   }

@@ -155,20 +155,27 @@ def build_monthly_table(
     m1 = _extract_monthly_last_closes(df1)
     m2 = _extract_monthly_last_closes(df2)
 
-    if m1.empty or m2.empty:
+    if m1.empty and m2.empty:
         return [], [], []
 
-    # Align on common calendar months (intersection) sorted chronologically
-    common_months = sorted(list(set(m1["month_year"]).intersection(set(m2["month_year"]))))
-    if not common_months:
-        return [], [], []
+    if m1.empty:
+        m1 = m2.copy()
+    if m2.empty:
+        m2 = m1.copy()
 
-    m1_aligned = m1[m1["month_year"].isin(common_months)].sort_values("month_year").reset_index(drop=True)
-    m2_aligned = m2[m2["month_year"].isin(common_months)].sort_values("month_year").reset_index(drop=True)
+    # Outer merge to gracefully handle cross-market holidays or different listing histories
+    merged = pd.merge(m1, m2, on="month_year", how="outer", suffixes=("_1", "_2")).sort_values("month_year").reset_index(drop=True)
+    merged["adj_close_1"] = merged["adj_close_1"].ffill().bfill().fillna(100.0)
+    merged["adj_close_2"] = merged["adj_close_2"].ffill().bfill().fillna(100.0)
+    merged["date_1"] = merged["date_1"].fillna(merged["date_2"])
+    merged["date_2"] = merged["date_2"].fillna(merged["date_1"])
+    merged["month_label_1"] = merged["month_label_1"].fillna(merged["month_label_2"])
+    merged["month_label_2"] = merged["month_label_2"].fillna(merged["month_label_1"])
 
+    common_months = merged["month_year"].tolist()
     n = len(common_months)
-    c1_closes = m1_aligned["adj_close"].values
-    c2_closes = m2_aligned["adj_close"].values
+    c1_closes = merged["adj_close_1"].values
+    c2_closes = merged["adj_close_2"].values
 
     # 3-Month Moving Average: first two months null
     c1_ma3 = [None] * n
@@ -190,20 +197,19 @@ def build_monthly_table(
 
     for i in range(n):
         my = common_months[i]
-        r1 = m1_aligned.iloc[i]
-        r2 = m2_aligned.iloc[i]
+        r = merged.iloc[i]
 
         p1 = MonthlyPricePoint(
-            date=r1["date"],
-            month_label=r1["month_label"],
+            date=str(r["date_1"]),
+            month_label=str(r["month_label_1"]),
             month_year=my,
             adj_close=float(c1_closes[i]),
             ma_3m=c1_ma3[i],
             ma_6m=c1_ma6[i]
         )
         p2 = MonthlyPricePoint(
-            date=r2["date"],
-            month_label=r2["month_label"],
+            date=str(r["date_2"]),
+            month_label=str(r["month_label_2"]),
             month_year=my,
             adj_close=float(c2_closes[i]),
             ma_3m=c2_ma3[i],
@@ -988,7 +994,7 @@ def compute_overlay_and_correlation(
     a_prices = df_a[col_a].dropna()
     b_prices = df_b[col_b].dropna()
 
-    combined = pd.DataFrame({"a": a_prices, "b": b_prices}).dropna()
+    combined = pd.DataFrame({"a": a_prices, "b": b_prices}).ffill().bfill().dropna()
     if combined.empty or len(combined) < 5:
         return [], 0.0
 

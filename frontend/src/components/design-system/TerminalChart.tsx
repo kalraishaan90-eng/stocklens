@@ -363,23 +363,23 @@ const TerminalChartView: React.FC<TerminalChartProps> = ({
             <CartesianGrid
               strokeDasharray="3 3"
               vertical={false}
-              stroke="rgba(255, 255, 255, 0.04)"
+              stroke="rgba(131, 127, 120, 0.12)"
             />
 
             <XAxis
               dataKey="date"
-              stroke="#5E5F5A"
-              tick={{ fill: '#9A9A94', fontSize: 11, fontFamily: 'JetBrains Mono' }}
+              stroke="#4D524B"
+              tick={{ fill: '#837F78', fontSize: 11, fontFamily: 'JetBrains Mono' }}
               tickLine={false}
-              axisLine={{ stroke: 'rgba(255, 255, 255, 0.08)' }}
+              axisLine={{ stroke: 'rgba(131, 127, 120, 0.2)' }}
               dy={10}
               interval="preserveStartEnd"
               minTickGap={28}
             />
 
             <YAxis
-              stroke="#5E5F5A"
-              tick={{ fill: '#9A9A94', fontSize: 11, fontFamily: 'JetBrains Mono' }}
+              stroke="#4D524B"
+              tick={{ fill: '#837F78', fontSize: 11, fontFamily: 'JetBrains Mono' }}
               tickLine={false}
               axisLine={false}
               tickFormatter={(val) => (isRebased ? `${val}` : `₹${val}`)}
@@ -390,7 +390,7 @@ const TerminalChartView: React.FC<TerminalChartProps> = ({
             <Tooltip
               content={<CustomTooltip />}
               cursor={{
-                stroke: 'rgba(255, 255, 255, 0.2)',
+                stroke: 'rgba(206, 26, 30, 0.45)',
                 strokeWidth: 1,
                 strokeDasharray: '4 4',
               }}

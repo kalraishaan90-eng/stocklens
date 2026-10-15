@@ -64,7 +64,7 @@ export const Navbar: React.FC = () => {
           className="flex items-center gap-2 sm:gap-3 group shrink-0"
           aria-label="StockLens home"
         >
-          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-md bg-gold/10 border border-gold/30 flex items-center justify-center text-gold group-hover:bg-gold/15 transition-colors">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-md bg-pepper/15 border border-pepper/35 flex items-center justify-center text-pepper group-hover:bg-pepper/25 transition-colors">
             <BarChart2 className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
           </div>
           <div className="leading-tight">
@@ -90,7 +90,7 @@ export const Navbar: React.FC = () => {
                 aria-current={isActive ? 'page' : undefined}
                 className={`flex items-center gap-1.5 px-2 sm:px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   isActive
-                    ? 'bg-gold/10 text-gold border border-gold/30'
+                    ? 'bg-pepper/15 text-pepper border border-pepper/35'
                     : 'text-editorial-secondary hover:text-editorial-primary hover:bg-surface-hover border border-transparent'
                 }`}
               >

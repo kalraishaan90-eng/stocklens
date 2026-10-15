@@ -15,7 +15,7 @@ export interface CompanyInputProps {
   value: string;
   onChange: (value: string) => void;
   onSelectOption?: (option: CompanyOption) => void;
-  accent?: 'gold' | 'cyan' | 'default';
+  accent?: 'gold' | 'cyan' | 'pepper' | 'blood' | 'default';
   accentNumber?: 1 | 2;
   placeholder?: string;
   suggestions?: CompanyOption[];
@@ -121,6 +121,18 @@ export const CompanyInput: React.FC<CompanyInputProps> = ({
   };
 
   const accentStyles = {
+    pepper: {
+      badge: 'bg-pepper/15 text-pepper border-pepper/35',
+      glow: 'focus-within:border-pepper/60 focus-within:ring-pepper/30',
+      activeItem: 'bg-pepper/10 text-editorial-primary',
+      dot: 'bg-pepper',
+    },
+    blood: {
+      badge: 'bg-blood/20 text-pepper-light border-blood-border',
+      glow: 'focus-within:border-blood/60 focus-within:ring-blood/30',
+      activeItem: 'bg-blood/15 text-editorial-primary',
+      dot: 'bg-blood',
+    },
     gold: {
       badge: 'bg-gold/15 text-gold border-gold/30',
       glow: 'focus-within:border-gold/60 focus-within:ring-gold/30',
@@ -139,7 +151,7 @@ export const CompanyInput: React.FC<CompanyInputProps> = ({
       activeItem: 'bg-surface-raised text-editorial-primary',
       dot: 'bg-editorial-primary',
     },
-  }[accent];
+  }[accent || 'gold'];
 
   // Check if current value matches an exact company
   const matchedCompany = suggestions.find(
@@ -155,6 +167,8 @@ export const CompanyInput: React.FC<CompanyInputProps> = ({
             <span
               className={clsx(
                 'w-4 h-4 rounded-full text-[10px] font-mono font-bold flex items-center justify-center border',
+                accent === 'pepper' ? 'border-pepper/40 text-pepper bg-pepper/10' :
+                accent === 'blood' ? 'border-blood/40 text-pepper bg-blood/20' :
                 accent === 'gold' ? 'border-gold/40 text-gold bg-gold/10' : 'border-cyan/40 text-cyan bg-cyan/10'
               )}
             >

@@ -1,4 +1,10 @@
 import asyncio
+import sys
+if sys.platform == "win32":
+    try:
+        asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+    except Exception:
+        pass
 import os
 import re
 import time
@@ -7,7 +13,7 @@ from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 from math import ceil
 from threading import Lock
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 
 from fastapi import FastAPI, HTTPException, Request, Query, status, Response, Depends
 from fastapi.exceptions import RequestValidationError
@@ -381,84 +387,103 @@ async def _analyze_stocks_live(payload: AnalyzeRequest) -> AnalysisResponse:
     enriched_a = await analyze_market_context_for_events(df_a, events_to_analyze_a, sector_str=info_a.sector)
     enriched_b = await analyze_market_context_for_events(df_b, events_to_analyze_b, sector_str=info_b.sector)
 
+    async def _process_single_anomaly(item: Dict[str, Any], t_sym: str, c_name: str) -> PriceMovementEvent:
+        dt = item["primary_date"]
+        end_dt = item.get("end_date")
+        chg = item["change_pct"]
+        direct = item["direction"]
+        vol_mult = item.get("volume_spike_multiplier", 1.0)
+        gap = item.get("gap_pct", 0.0)
+        m_ctx = item.get("market_context", {})
+
+        try:
+            news_res = await asyncio.wait_for(
+                fetch_news_for_event(t_sym, c_name, dt, end_date_str=end_dt),
+                timeout=2.5
+            )
+        except Exception:
+            news_res = {
+                "headlines": [],
+                "corporate_events": [],
+                "has_news": False,
+                "headline": "No specific headline indexed for this session",
+                "source": "Market Trading Data",
+                "url": None
+            }
+
+        try:
+            expl = await asyncio.wait_for(
+                explain_price_movement(
+                    company_name=c_name,
+                    ticker=t_sym,
+                    event_date=item["date"],
+                    change_pct=chg,
+                    direction=direct,
+                    vol_multiplier=vol_mult,
+                    gap_pct=gap,
+                    market_context=m_ctx,
+                    news_res=news_res
+                ),
+                timeout=2.5
+            )
+        except Exception:
+            expl = {
+                "summary": f"{c_name} recorded a {chg:+.2f}% price movement on {item['date']}.",
+                "likely_reasons": ["Trading volume shift", "Market volatility"],
+                "confidence": "Medium",
+                "sources_used": ["Market Trading Data"],
+                "is_ai_generated": False
+            }
+
+        market_ctx_obj = None
+        if m_ctx:
+            market_ctx_obj = MarketContext(
+                stock_return_pct=m_ctx.get("stock_return_pct", chg),
+                nifty_return_pct=m_ctx.get("nifty_return_pct", 0.0),
+                sector_return_pct=m_ctx.get("sector_return_pct"),
+                residual_pct=m_ctx.get("residual_pct", 0.0),
+                classification=m_ctx.get("classification", "Company-specific move"),
+                sector_name=m_ctx.get("sector_name"),
+                explanation_factor=m_ctx.get("explanation_factor", "")
+            )
+
+        news_items = [
+            NewsItem(
+                title=h.get("title", ""),
+                source=h.get("source", ""),
+                url=h.get("url"),
+                date=h.get("date")
+            )
+            for h in news_res.get("headlines", [])
+        ]
+
+        return PriceMovementEvent(
+            date=item["date"],
+            start_date=item.get("start_date"),
+            end_date=item.get("end_date"),
+            change_pct=chg,
+            direction=direct,
+            volume_spike_multiplier=vol_mult,
+            gap_pct=gap,
+            market_context=market_ctx_obj,
+            headlines=news_items,
+            corporate_events=news_res.get("corporate_events", []),
+            explanation=expl.get("summary", ""),
+            likely_reasons=expl.get("likely_reasons", []),
+            confidence=expl.get("confidence", "Medium"),
+            sources_used=expl.get("sources_used", []),
+            is_recent=item.get("is_recent", False),
+            is_ai_generated=expl.get("is_ai_generated", False),
+            headline=news_res.get("headline", "No specific headline indexed"),
+            source=news_res.get("source", "Market Trading Data"),
+            url=news_res.get("url")
+        )
+
     async def _process_anomalies(enriched_list, t_sym, c_name):
-        events: list[PriceMovementEvent] = []
-        recent_ev: Optional[PriceMovementEvent] = None
-
-        for item in enriched_list:
-            dt = item["primary_date"]
-            end_dt = item.get("end_date")
-            chg = item["change_pct"]
-            direct = item["direction"]
-            vol_mult = item.get("volume_spike_multiplier", 1.0)
-            gap = item.get("gap_pct", 0.0)
-            m_ctx = item.get("market_context", {})
-
-            # Fetch real news and corporate events
-            news_res = await fetch_news_for_event(t_sym, c_name, dt, end_date_str=end_dt)
-
-            # Generate explanation via Gemini or Rule-Based Fallback
-            expl = await explain_price_movement(
-                company_name=c_name,
-                ticker=t_sym,
-                event_date=item["date"],
-                change_pct=chg,
-                direction=direct,
-                vol_multiplier=vol_mult,
-                gap_pct=gap,
-                market_context=m_ctx,
-                news_res=news_res
-            )
-
-            market_ctx_obj = None
-            if m_ctx:
-                market_ctx_obj = MarketContext(
-                    stock_return_pct=m_ctx.get("stock_return_pct", chg),
-                    nifty_return_pct=m_ctx.get("nifty_return_pct", 0.0),
-                    sector_return_pct=m_ctx.get("sector_return_pct"),
-                    residual_pct=m_ctx.get("residual_pct", 0.0),
-                    classification=m_ctx.get("classification", "Company-specific move"),
-                    sector_name=m_ctx.get("sector_name"),
-                    explanation_factor=m_ctx.get("explanation_factor", "")
-                )
-
-            news_items = [
-                NewsItem(
-                    title=h.get("title", ""),
-                    source=h.get("source", ""),
-                    url=h.get("url"),
-                    date=h.get("date")
-                )
-                for h in news_res.get("headlines", [])
-            ]
-
-            ev_obj = PriceMovementEvent(
-                date=item["date"],
-                start_date=item.get("start_date"),
-                end_date=item.get("end_date"),
-                change_pct=chg,
-                direction=direct,
-                volume_spike_multiplier=vol_mult,
-                gap_pct=gap,
-                market_context=market_ctx_obj,
-                headlines=news_items,
-                corporate_events=news_res.get("corporate_events", []),
-                explanation=expl.get("summary", ""),
-                likely_reasons=expl.get("likely_reasons", []),
-                confidence=expl.get("confidence", "Medium"),
-                sources_used=expl.get("sources_used", []),
-                is_recent=item.get("is_recent", False),
-                is_ai_generated=expl.get("is_ai_generated", False),
-                headline=news_res.get("headline", "No specific headline indexed"),
-                source=news_res.get("source", "Market Trading Data"),
-                url=news_res.get("url")
-            )
-
-            if item.get("is_recent"):
-                recent_ev = ev_obj
-            else:
-                events.append(ev_obj)
-
+        tasks = [_process_single_anomaly(item, t_sym, c_name) for item in enriched_list]
+        processed = await asyncio.gather(*tasks) if tasks else []
+        events = [ev for ev in processed if not ev.is_recent]
+        recent_ev = next((ev for ev in processed if ev.is_recent), None)
         return events, recent_ev
 
     (events_a, recent_ev_a), (events_b, recent_ev_b) = await asyncio.gather(
@@ -616,24 +641,32 @@ async def _analyze_stocks_live(payload: AnalyzeRequest) -> AnalysisResponse:
 async def analyze_stocks(payload: AnalyzeRequest) -> AnalysisResponse:
     """Analyze live first; serve a captured, date-stamped result when that fails."""
     pair_key = get_pair_key(payload.get_company_a(), payload.get_company_b())
-    snapshot = load_demo_snapshot(pair_key) if pair_key and OFFLINE_DEMO_ENABLED else None
+    if pair_key and (OFFLINE_DEMO_ENABLED or payload.use_offline_demo):
+        snapshot = load_demo_snapshot(pair_key)
+        if snapshot:
+            return AnalysisResponse.model_validate(snapshot)
+
     cache_key = "|".join((payload.get_company_a().strip().casefold(), payload.get_company_b().strip().casefold()))
     cached = _ANALYSIS_CACHE.get(cache_key)
     if cached and cached[0] > time.monotonic():
         return cached[1]
     _ANALYSIS_CACHE.pop(cache_key, None)
+
+    timeout_sec = int(os.getenv("ANALYZE_TIMEOUT_SECONDS", "75"))
     try:
-        timeout_sec = int(os.getenv("ANALYZE_TIMEOUT_SECONDS", "45"))
         result = await asyncio.wait_for(_analyze_stocks_live(payload), timeout=timeout_sec)
         if len(_ANALYSIS_CACHE) >= 30:
             _ANALYSIS_CACHE.clear()
         _ANALYSIS_CACHE[cache_key] = (time.monotonic() + _ANALYSIS_CACHE_TTL_SECONDS, result)
         return result
-    except asyncio.TimeoutError:
-        raise HTTPException(status_code=504, detail=f"Analysis exceeded the {timeout_sec}-second live response window. Please retry.")
-    except HTTPException:
-        raise
     except Exception as exc:
+        logger.warning(f"Live analysis encountered an issue ({exc}). Checking fallback snapshots...")
+        if pair_key:
+            snapshot = load_demo_snapshot(pair_key)
+            if snapshot:
+                return AnalysisResponse.model_validate(snapshot)
+        if isinstance(exc, HTTPException):
+            raise exc
         logger.error(f"Analysis failed: {exc}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Analysis failed: {str(exc)}")
 

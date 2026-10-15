@@ -104,7 +104,18 @@ def classify_event_market_level(
     """
     residual_nifty = stock_return - (beta_nifty * nifty_return)
     
-    sec_ret = sector_return if sector_return is not None else 0.0
+    # Sanitize sector_return if NaN or Inf
+    has_sector = False
+    sec_ret = 0.0
+    if sector_return is not None:
+        try:
+            val = float(sector_return)
+            if not np.isnan(val) and not np.isinf(val):
+                sec_ret = val
+                has_sector = True
+        except (ValueError, TypeError):
+            pass
+
     residual_sector = stock_return - (beta_sector * sec_ret)
 
     # NIFTY sharp move: absolute return >= 1.25%
@@ -113,8 +124,8 @@ def classify_event_market_level(
     is_nifty_resid_small = abs(residual_nifty) <= max(2.5, 0.45 * abs(stock_return)) and (stock_return * nifty_return > 0)
 
     # Sector sharp move: absolute return >= 1.75%
-    is_sec_sharp = abs(sec_ret) >= 1.75
-    is_sec_resid_small = abs(residual_sector) <= max(2.5, 0.45 * abs(stock_return)) and (stock_return * sec_ret > 0)
+    is_sec_sharp = has_sector and abs(sec_ret) >= 1.75
+    is_sec_resid_small = has_sector and abs(residual_sector) <= max(2.5, 0.45 * abs(stock_return)) and (stock_return * sec_ret > 0)
 
     if is_nifty_sharp and is_nifty_resid_small:
         classification = "Market-wide move"
@@ -138,7 +149,7 @@ def classify_event_market_level(
     return {
         "stock_return_pct": round(float(stock_return), 2),
         "nifty_return_pct": round(float(nifty_return), 2),
-        "sector_return_pct": round(float(sec_ret), 2) if sector_return is not None else None,
+        "sector_return_pct": round(float(sec_ret), 2) if has_sector else None,
         "residual_pct": round(float(residual_nifty), 2),
         "classification": classification,
         "sector_name": sector_name,
